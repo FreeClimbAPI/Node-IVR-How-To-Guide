@@ -23,6 +23,8 @@ env:
         - ACCOUNT_ID="N/A"
         - AUTH_TOKEN="N/A"
         - FC_PHONE_NUMBER="N/A"
+        - APPLICATION_ID="N/A"
+        - FC_NUMBER="N/A"
     jobs:
         - TEST_DIR=call-router-1.0
         
