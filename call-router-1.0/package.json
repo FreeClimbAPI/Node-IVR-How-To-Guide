@@ -1,5 +1,5 @@
 {
-"name": "Node_IVR_Sample_Base",
+  "name": "Node_IVR_Sample_Base",
   "version": "1.0.0",
   "description": "Base for FreeClimb Node-SDK sample IVR applications",
   "main": "index.js",
