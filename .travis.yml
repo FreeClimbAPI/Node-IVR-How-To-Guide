@@ -26,14 +26,18 @@ env:
     jobs:
         - TEST_DIR=call-router-1.0
 
+before_install:
+    - cd $TEST_DIR
+
+before_script:
+    - cd $TEST_DIR
+
 jobs:
     include:
-        - stage: install
-          script: cd $TEST_DIR && yarn install
         - stage: lint
-          script: cd $TEST_DIR && yarn lint
+          script: yarn lint
         - stage: test
-          script: cd $TEST_DIR && yarn test:cov
+          script: yarn test:cov
 
 stages:
     - install
