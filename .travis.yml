@@ -25,8 +25,10 @@ env:
         - FC_PHONE_NUMBER="N/A"
     jobs:
         - TEST_DIR=call-router-1.0
+        
 
 before_install:
+    - npm install -g yarn
     - cd $TEST_DIR
 
 before_script:
@@ -37,7 +39,7 @@ jobs:
         - stage: lint
           script: yarn lint
         - stage: test
-          script: yarn test:cov
+          script:  yarn test:cov
 
 stages:
     - install
