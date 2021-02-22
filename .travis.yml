@@ -31,9 +31,6 @@ before_install:
     - npm install -g yarn
     - cd $TEST_DIR
 
-before_script:
-    - cd $TEST_DIR
-
 jobs:
     include:
         - stage: lint
