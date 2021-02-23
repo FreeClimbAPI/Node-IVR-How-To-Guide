@@ -3,13 +3,13 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.com/FreeClimbAPI/Node-IVR-Sample-Apps.svg?token=JbHus4WeErdM9EyuXedh&branch=master)](https://travis-ci.com/FreeClimbAPI/Node-IVR-Sample-Apps) 
+[![Build Status](https://travis-ci.com/FreeClimbAPI/Node-IVR-Sample-Apps.svg?token=JbHus4WeErdM9EyuXedh&branch=master)](https://travis-ci.com/FreeClimbAPI/Node-IVR-Sample-Apps)
 [![Coverage Status](https://coveralls.io/repos/github/FreeClimbAPI/Node-2FA-Tutorial/badge.svg?branch=master)](https://coveralls.io/github/FreeClimbAPI/Node-IVR-Sample-Apps?branch=master)
 
 This project serves as a guide to help you build an application with FreeClimb. View this tutorial on (tutorial coming soon).  
 Specifically, the project will:
 
-```TBD```
+`TBD`
 
 ## Setting up your new app within your FreeClimb account
 
@@ -27,7 +27,7 @@ To get started using a FreeClimb account, follow the instructions [here](https:/
 
     | ENV VARIABLE    | DESCRIPTION                                                                                                                                                                                                                               |
     | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | HOST            | The hostname as defined in your FC application                                                                                                                                                                                            | 
+    | HOST            | The hostname as defined in your FC application                                                                                                                                                                                            |
     | PORT            | The port your application is running on                                                                                                                                                                                                   |
     | ACCOUNT_ID      | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                            |
     | AUTH_TOKEN      | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                  |
