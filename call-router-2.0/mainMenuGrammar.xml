@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<grammar xml:lang="en-US" tag-format="semantics-ms/1.0" version="1.0" root="option" mode="voice" xmlns="http://www.w3.org/2001/06/grammar">
+<rule id="option" scope="public">
+        <item>
+                <item repeat="0-1"><ruleref uri="#UMFILLER"/></item>
+                <item>
+                    <one-of>
+                        <item>existing<tag>$._value = "EXISTING";</tag></item>
+                        <item>new<tag>$._value = "NEW";</tag></item>
+                        <item>operator<tag>$._value = "OPERATOR";</tag></item>
+                    </one-of>
+                </item>
+                <item repeat="0-1"><ruleref uri="#TRAILERS"/></item>
+        </item>
+</rule>
+
+<rule id="UMFILLER">
+        <one-of>
+                <item> uh </item>
+                <item> um </item>
+                <item> hm </item>
+                <item> ah </item>
+                <item> er </item>
+        </one-of>
+</rule>
+
+<rule id="TRAILERS">
+        <one-of>
+                <item> maam </item>
+                <item> sir </item>
+        </one-of>
+</rule>
+
+</grammar>
