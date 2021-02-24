@@ -16,7 +16,6 @@ const freeclimb = freeclimbSDK(accountId, authToken)
 let mainMenuErrCount = 0
 
 app.post('/incomingCall', (req, res) => {
-  //  freeclimb.api.calls.create(req.body.from, req.body.to, applicationId).catch(err => {console.log(err) })
   res
     .status(200)
     .json(
