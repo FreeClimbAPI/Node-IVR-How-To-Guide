@@ -40,15 +40,15 @@ describe('POST /mainMenuPrompt', () => {
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
-                GetDigits: {
+                GetSpeech: {
                     "actionUrl": `${host}/mainMenu`,
-                    "flushBuffer": true,
-                    "maxDigits": 1,
-                    "minDigits": 1,
+                    "grammarFile": `${host}/mainMenuGrammar`,
+                    "grammarRule": "option",
+                    "grammarType": "URL",
                     "prompts": [
                         {
                             Say: {
-                                text: "Press 1 for existing orders, 2 for new orders, or 0 to speak to an operator"
+                                text: "Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator"
                             }
                         }
                     ]
@@ -60,7 +60,24 @@ describe('POST /mainMenuPrompt', () => {
 
 describe('POST /mainMenu', () => {
     it('returns the percl command for redirect to /transfer when sent with digit "0" ', async () => {
-        const res = await request.post('/mainMenu').type('form').send({digits:"0"})
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"0", reason:"digit"})
+        expect(res.status).toBe(200)
+        expect(res.body).toStrictEqual([
+            {
+                "Say": {
+                    "text": "Redirecting you to an operator"
+                }
+            }, 
+            {
+                "Redirect": {
+                    "actionUrl": `${host}/transfer`
+                }
+            }
+        ])
+    })
+
+    it('returns the percl command for redirect to /transfer when sent with speech recognition input "OPERATOR ', async () => {
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"OPERATOR", reason:"recognition"})
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
@@ -77,7 +94,24 @@ describe('POST /mainMenu', () => {
     })
 
     it('returns the percl command for redirect to /endCall when sent with digit "1" ', async () => {
-        const res = await request.post('/mainMenu').type('form').send({digits:"1"})
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"1",reason:"digit"})
+        expect(res.status).toBe(200)
+        expect(res.body).toStrictEqual([
+            {
+                "Say": {
+                    "text": "Redirecting your call to existing orders."
+                }
+            }, 
+            {
+                "Redirect": {
+                    "actionUrl": `${host}/endCall`
+                }
+            }
+        ])
+    })
+
+    it('returns the percl command for redirect to /endCall when sent with speech recognition input "EXISTING" ', async () => {
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"EXISTING", reason:"recognition"})
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
@@ -94,7 +128,24 @@ describe('POST /mainMenu', () => {
     })
 
     it('returns the percl command for redirect to /endCall when sent with digit "2" ', async () => {
-        const res = await request.post('/mainMenu').type('form').send({digits:"2"})
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"2",reason:"digit"})
+        expect(res.status).toBe(200)
+        expect(res.body).toStrictEqual([
+            {
+                "Say": {
+                    "text": "Redirecting your call to new orders."
+                }
+            }, 
+            {
+                "Redirect": {
+                    "actionUrl": `${host}/endCall`
+                }
+            }
+        ])
+    })
+
+    it('returns the percl command for redirect to /endCall when sent with speech recognition input "NEW" ', async () => {
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"NEW", reason:"recognition"})
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
@@ -111,7 +162,24 @@ describe('POST /mainMenu', () => {
     })
 
     it('returns the percl command for redirect back to mainMenuPrompt when sent with invalid digits', async () => {
-        const res = await request.post('/mainMenu').type('form').send({digits:"7"})
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"7",reason:"digit"})
+        expect(res.status).toBe(200)
+        expect(res.body).toStrictEqual([
+            {
+                "Say": {
+                    "text": "Error, please try again"
+                }
+            }, 
+            {
+                "Redirect": {
+                    "actionUrl": `${host}/mainMenuPrompt`
+                }
+            }
+        ])
+    })
+
+    it('returns the percl command for redirect back to mainMenuPrompt when sent with invalid speech recognition', async () => {
+        const res = await request.post('/mainMenu').type('form').send({recognitionResult:"INVALID",reason:"recognition"})
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
