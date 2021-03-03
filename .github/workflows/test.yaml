@@ -11,4 +11,5 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install dependencies
+        working-directory: call-router-1.0
         run: yarn install --frozen-lockfile
