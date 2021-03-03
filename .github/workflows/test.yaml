@@ -19,5 +19,12 @@ jobs:
       - name: Test
         working-directory: call-router-1.0
         run: yarn test:cov
+        env:
+          AUTH_TOKEN: "N/A"
+          ACCOUNT_ID: "N/A"
+          APPLICATION_ID: "N/A"
+          FC_NUMBER: "N/A"
+          PORT: "N/A"
+          HOST: "N/A"
 
       
