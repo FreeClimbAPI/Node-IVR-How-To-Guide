@@ -24,7 +24,7 @@ jobs:
           ACCOUNT_ID: "N/A"
           APPLICATION_ID: "N/A"
           FC_NUMBER: "N/A"
-          PORT: "N/A"
+          PORT: "3000"
           HOST: "N/A"
 
       
