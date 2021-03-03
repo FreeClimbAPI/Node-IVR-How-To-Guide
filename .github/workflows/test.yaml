@@ -13,3 +13,11 @@ jobs:
       - name: Install dependencies
         working-directory: call-router-1.0
         run: yarn install --frozen-lockfile
+      - name: Static Code Analysis
+        working-directory: call-router-1.0
+        run: yarn lint
+      - name: Test
+        working-directory: call-router-1.0
+        run: yarn test:cov
+
+      
