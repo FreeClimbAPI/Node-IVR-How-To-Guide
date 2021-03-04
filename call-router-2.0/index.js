@@ -12,7 +12,6 @@ const authToken = process.env.AUTH_TOKEN
 const applicationId = process.env.APPLICATION_ID
 const freeclimb = freeclimbSDK(accountId, authToken)
 
-
 let mainMenuErrCount = 0
 
 app.post('/incomingCall', (req, res) => {
@@ -32,7 +31,7 @@ app.post('/mainMenuPrompt', (req, res) => {
     freeclimb.percl.build(
       freeclimb.percl.getSpeech(`${host}/mainMenu`, `${host}/mainMenuGrammar`, {
         grammarType: freeclimb.enums.grammarType.URL,
-        grammarRule: "option",
+        grammarRule: 'option',
         prompts: [
           freeclimb.percl.say(
             'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
@@ -47,7 +46,6 @@ app.get('/mainMenuGrammar', function (req, res) {
   const file = `${__dirname}/mainMenuGrammar.xml`
   res.download(file)
 })
-
 
 app.post('/mainMenu', (req, res) => {
   let menuOpts
@@ -72,7 +70,10 @@ app.post('/mainMenu', (req, res) => {
       ],
       [
         '0',
-        { script: 'Redirecting you to an operator', redirect: `${host}/transfer` }
+        {
+          script: 'Redirecting you to an operator',
+          redirect: `${host}/transfer`
+        }
       ]
     ])
   } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
@@ -93,7 +94,10 @@ app.post('/mainMenu', (req, res) => {
       ],
       [
         'OPERATOR',
-        { script: 'Redirecting you to an operator', redirect: `${host}/transfer` }
+        {
+          script: 'Redirecting you to an operator',
+          redirect: `${host}/transfer`
+        }
       ]
     ])
   }

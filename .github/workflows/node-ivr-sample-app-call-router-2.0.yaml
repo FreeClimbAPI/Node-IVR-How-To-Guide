@@ -1,0 +1,33 @@
+name: Call Router 2.0 CI
+on: [push]
+
+defaults:
+  run:
+    working-directory: call-router-2.0
+
+jobs:
+  call_router_2_0:
+    name: Call Router 2.0
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Static Code Analysis
+        run: yarn lint
+      - name: Test
+        run: yarn test:cov
+        env:
+          AUTH_TOKEN: "N/A"
+          ACCOUNT_ID: "N/A"
+          APPLICATION_ID: "N/A"
+          FC_NUMBER: "N/A"
+          PORT: "3000"
+          HOST: "http://localhost:3000"
