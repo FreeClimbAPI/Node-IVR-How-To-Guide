@@ -1,12 +1,16 @@
 name: Call Router 1.0 CI
 on: [push]
 
+
 defaults:
   run:
     working-directory: call-router-1.0
 
 jobs:
   call_router_1_0:
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
     name: Call Router 1.0
     runs-on: ubuntu-latest
     steps:
@@ -14,7 +18,7 @@ jobs:
       - name: use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Static Code Analysis

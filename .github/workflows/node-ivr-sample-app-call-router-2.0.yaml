@@ -9,12 +9,15 @@ jobs:
   call_router_2_0:
     name: Call Router 2.0
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
     steps:
       - uses: actions/checkout@v2
       - name: use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Static Code Analysis
