@@ -9,7 +9,9 @@
 This project serves as a guide to help you build an application with FreeClimb. View this tutorial on (tutorial coming soon).  
 Specifically, the project will:
 
-`TBD`
+-   Answer An incoming call from the user
+-   Collect DTMF input from the user
+-   Route the users call to based in DTMF input
 
 ## Setting up your new app within your FreeClimb account
 
@@ -32,7 +34,6 @@ To get started using a FreeClimb account, follow the instructions [here](https:/
     | ACCOUNT_ID      | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                            |
     | AUTH_TOKEN      | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                  |
     | APPLICATION_ID  | The application id as defined in the FC dashboard                                                                                                                                                                                         |
-    | FC_PHONE_NUMBER | [FreeClimb Phone number](https://www.freeclimb.com/dashboard/portal/numbers) being used to send verification codes. To learn more, go [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb#section-2-get-a-phone-number) |
 
 ## Running the Tutorial
 
