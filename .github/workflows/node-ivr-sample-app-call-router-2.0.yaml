@@ -1,5 +1,8 @@
 name: Call Router 2.0 CI
-on: [push]
+on:
+  push:
+    paths:
+      - 'call-router-2.0/**'
 
 defaults:
   run:
@@ -8,10 +11,11 @@ defaults:
 jobs:
   call_router_2_0:
     name: Call Router 2.0
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest]
         node-version: [12.x, 14.x]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: use Node.js

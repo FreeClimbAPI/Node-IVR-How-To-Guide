@@ -1,0 +1,39 @@
+name: Push to Docker Hub
+
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  call_router_1_0:
+    name: Build & Push Call Router 1.0
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          file: ./call-router-1.0/Dockerfile
+          context: ./call-router-1.0
+          tags: freeclimbapi/node-ivr-sample-call-router-1.0:latest
+          push: true
+  call_router_2_0:
+    name: Build & Push Call Router 2.0
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          file: ./call-router-2.0/Dockerfile
+          context: ./call-router-2.0
+          tags: freeclimbapi/node-ivr-sample-call-router-2.0:latest
+          push: true
