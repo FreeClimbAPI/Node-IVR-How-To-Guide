@@ -11,33 +11,40 @@ router = express.Router()
 let retries = 0
 
 router.post('/accountLookup', (req, res) => {
-    if (!accounts.get(req.param('acct'))) {
-        retries++
-        res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say("Sorry, we couldnt find that account number."),
-                freeclimb.percl.redirect(`${host}/accountNumberPrompt`)
-            )
+  if (!accounts.get(req.param('acct'))) {
+    retries++
+    res
+      .status(200)
+      .json(
+        freeclimb.percl.build(
+          freeclimb.percl.say('Sorry, we couldnt find that account number.'),
+          freeclimb.percl.redirect(`${host}/accountNumberPrompt`)
         )
-    } else if (retries >= 2) {
-        retries = 0
-        res.status(200).json(
-
-            freeclimb.percl.build(
-                freeclimb.percl.say('Max retry limit reached, please wait while we connect you to an operator'),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/transfer`)
-            )
-
+      )
+  } else if (retries >= 2) {
+    retries = 0
+    res
+      .status(200)
+      .json(
+        freeclimb.percl.build(
+          freeclimb.percl.say(
+            'Max retry limit reached, please wait while we connect you to an operator'
+          ),
+          freeclimb.percl.pause(100),
+          freeclimb.percl.redirect(`${host}/transfer`)
         )
-    } else {
-        res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.redirect(`${host}/accountRead?acct=${req.param('acct')}`)
-            )
+      )
+  } else {
+    res
+      .status(200)
+      .json(
+        freeclimb.percl.build(
+          freeclimb.percl.redirect(
+            `${host}/accountRead?acct=${req.param('acct')}`
+          )
         )
-    }
-
+      )
+  }
 })
 
 module.exports = router
