@@ -1,4 +1,4 @@
-# Node IVR Call Router 1.0
+# Node IVR Call Router 2.0
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -6,18 +6,28 @@
 [![Built Status](https://github.com/FreeClimbAPI/Node-IVR-Sample-Apps/actions/workflows/node-ivr-sample-app-call-router-1.0.yaml/badge.svg)](https://github.com/FreeClimbAPI/Node-IVR-Sample-Apps/actions/workflows/node-ivr-sample-app-call-router-1.0.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/FreeClimbAPI/Node-2FA-Tutorial/badge.svg?branch=master)](https://coveralls.io/github/FreeClimbAPI/Node-IVR-Sample-Apps?branch=master)
 
-This project serves as a guide to help you build an application with FreeClimb. View this tutorial on (tutorial coming soon).  
+This project serves as a guide to help you build a basic IVR DTMF and voice-enabled call routing application with FreeClimb.
+
+**View the accompanying IVR Call Routing: DTMF and Voice-Enabled tutorial [here](https://docs.freeclimb.com/docs/ivr-call-routing-10).**
+
 Specifically, the project will:
-
-- Answer An incoming call from the user
+- Answer an incoming call from the user
 - Collect DTMF and/or speech input from the user
-- Route the users call to based in DTMF/speech input
+- Route the users call based on DTMF and/or speech input
 
-## Setting up your new app within your FreeClimb account
+## Requirements
+A [FreeClimb account](https://www.freeclimb.com/dashboard/signup/)
 
-To get started using a FreeClimb account, follow the instructions [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb).
+A [registered application](https://docs.freeclimb.com/docs/registering-and-configuring-an-application#register-an-app) with a named alias
 
-## Setting up the Tutorial
+A [configured FreeClimb number](https://docs.freeclimb.com/docs/getting-and-configuring-a-freeclimb-number) assigned to your application
+
+Tools:
+- [Node.js](https://nodejs.org/en/download/) 12.14.0 or later
+- [Yarn](https://yarnpkg.com/en/)
+- [dotenv-safe](https://www.npmjs.com/package/dotenv-safe)
+
+## Setting up the Sample App
 
 1. Install the required packages
 
@@ -29,14 +39,12 @@ To get started using a FreeClimb account, follow the instructions [here](https:/
 
    | ENV VARIABLE    | DESCRIPTION                                                                                                                                                                                                                               |
    | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | HOST            | The hostname as defined in your FC application                                                                                                                                                                                            |
-   | PORT            | The port your application is running on                                                                                                                                                                                                   |
-   | ACCOUNT_ID      | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                            |
-   | AUTH_TOKEN      | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                  |
-   | APPLICATION_ID  | The application id as defined in the FC dashboard                                                                                                                                                                                         |
-   | FC_PHONE_NUMBER | [FreeClimb Phone number](https://www.freeclimb.com/dashboard/portal/numbers) being used to send verification codes. To learn more, go [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb#section-2-get-a-phone-number) |
+    | ACCOUNT_ID      | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                            |
+    | AUTH_TOKEN      | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                  |
+    | HOST            | The hostname as defined in your FC application                                                                                                                                                                                            |
+    | PORT            | Specifies the port on which the app will run (e.g. PORT=3000 means you would direct your browser to http://localhost:3000).                                                                                                                                                                                              |
 
-## Running the Tutorial
+## Running the Sample App
 
 ```bash
 yarn start
