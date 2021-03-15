@@ -10,7 +10,6 @@ const port = process.env.PORT || 3000
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const authToken = process.env.AUTH_TOKEN
-const applicationId = process.env.APPLICATION_ID
 const freeclimb = freeclimbSDK(accountId, authToken)
 
 let mainMenuErrCount = 0
