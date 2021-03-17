@@ -57,13 +57,14 @@ router.post('/confirmAccountNumber', (req, res) => {
     ]
   ])
   if ((!digits || !menuOpts.get(digits)) && confirmNumberErrCount < 3) {
+      console.log("err count before: ", confirmNumberErrCount)
     confirmNumberErrCount++
     res
       .status(200)
       .json(
         freeclimb.percl.build(
           freeclimb.percl.say('Error'),
-          freeclimb.percl.redirect(`${host}/confirmAccountNumberPrompt`)
+          freeclimb.percl.redirect(`${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}`)
         )
       )
   } else if (confirmNumberErrCount >= 3 || retries >= 2) {

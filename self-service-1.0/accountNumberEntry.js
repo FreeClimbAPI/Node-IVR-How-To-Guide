@@ -25,7 +25,7 @@ router.post('/accountNumberPrompt', (req, res) => {
 router.post('/accountNumber', (req, res) => {
   const getDigitsResponse = req.body
   const digits = getDigitsResponse.digits
-  if (!digits && acctMenuErrCount < 3) {
+  if ((!digits || digits.length < 6) && acctMenuErrCount < 2) {
     acctMenuErrCount++
     res
       .status(200)
