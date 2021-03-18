@@ -25,7 +25,7 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])
@@ -48,7 +48,7 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])
@@ -71,7 +71,7 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])

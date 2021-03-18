@@ -54,7 +54,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/confirmAccountNumberPrompt?acct=111222",
+                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`,
                 },
             },
         ])
@@ -82,7 +82,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/confirmAccountNumberPrompt?acct=111222",
+                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`,
                 },
             },
         ])
@@ -115,7 +115,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])
@@ -148,7 +148,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])
@@ -170,7 +170,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/accountLookup?acct=111222",
+                    actionUrl: `${host}/accountLookup?acct=111222`,
                 },
             },
         ])
@@ -191,7 +191,7 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/accountNumberPrompt",
+                    actionUrl: `${host}/accountNumberPrompt`,
                 },
             },
         ])

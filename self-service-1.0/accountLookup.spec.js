@@ -25,7 +25,7 @@ describe('POST /acccountLookup', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/accountNumberPrompt",
+                    actionUrl: `${host}/accountNumberPrompt`,
                 },
             },
         ])
@@ -52,7 +52,7 @@ describe('POST /acccountLookup', () => {
             },
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/transfer",
+                    actionUrl: `${host}/transfer`,
                 },
             },
         ])
@@ -66,7 +66,7 @@ describe('POST /acccountLookup', () => {
         expect(res.body).toStrictEqual([
             {
                 Redirect: {
-                    actionUrl: "http://ff31fa983fc0.ngrok.io/accountRead?acct=111222",
+                    actionUrl: `${host}/accountRead?acct=111222`,
                 },
             },
         ])
