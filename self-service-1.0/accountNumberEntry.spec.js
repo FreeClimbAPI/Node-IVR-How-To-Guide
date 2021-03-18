@@ -1,10 +1,15 @@
-const { app } = require('./index')
-const supertest = require('supertest')
-const request = supertest(app)
+let request
 
 require('dotenv-safe').config()
 
 const host = process.env.HOST
+
+beforeEach(() => {
+    jest.resetModules()
+    const { app } = require('./index')
+    const supertest = require('supertest')
+    request = supertest(app)
+})
 
 describe('POST /accountNumberPrompt', () => {
     it('returns the percl commands for the account number entry menu getdigits including redirect and prompt', async () => {
@@ -83,7 +88,7 @@ describe('POST /accountNumber', () => {
     })
 
     it('returns a redirect to /transfer when the max number of retries has been reached', async () => {
-        for (let i = 0; i <= 2; i++) {
+        for (let i = 0; i < 2; i++) {
             await request
                 .post('/accountNumber')
                 .type('form')

@@ -1,10 +1,15 @@
-const { app } = require('./index')
-const supertest = require('supertest')
-const request = supertest(app)
+let request
 
 require('dotenv-safe').config()
 
 const host = process.env.HOST
+
+beforeEach(() => {
+    jest.resetModules()
+    const { app } = require('./index')
+    const supertest = require('supertest')
+    request = supertest(app)
+})
 
 describe('POST /mainMenuPrompt', () => {
     it('returns the percl commands for the main manu getdigits including redirect and prompt', async () => {

@@ -57,7 +57,6 @@ router.post('/confirmAccountNumber', (req, res) => {
     ]
   ])
   if ((!digits || !menuOpts.get(digits)) && confirmNumberErrCount < 3) {
-      console.log("err count before: ", confirmNumberErrCount)
     confirmNumberErrCount++
     res
       .status(200)
