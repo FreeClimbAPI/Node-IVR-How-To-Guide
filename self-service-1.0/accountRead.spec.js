@@ -24,9 +24,9 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 
@@ -47,9 +47,9 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 
@@ -70,9 +70,9 @@ describe('POST /acccountRead', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 })

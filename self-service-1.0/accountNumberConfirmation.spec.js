@@ -51,9 +51,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`,
-                },
-            },
+                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`
+                }
+            }
         ])
     })
 
@@ -78,9 +78,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`,
-                },
-            },
+                    actionUrl: `${host}/confirmAccountNumberPrompt?acct=111222`
+                }
+            }
         ])
     })
 
@@ -110,9 +110,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 
@@ -142,9 +142,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 
@@ -162,9 +162,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/accountLookup?acct=111222`,
-                },
-            },
+                    actionUrl: `${host}/accountLookup?acct=111222`
+                }
+            }
         ])
     })
 
@@ -182,9 +182,9 @@ describe('POST /confirmAccountNumber', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/accountNumberPrompt`,
-                },
-            },
+                    actionUrl: `${host}/accountNumberPrompt`
+                }
+            }
         ])
     })
 })

@@ -23,9 +23,9 @@ describe('POST /acccountLookup', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/accountNumberPrompt`,
-                },
-            },
+                    actionUrl: `${host}/accountNumberPrompt`
+                }
+            }
         ])
     })
 
@@ -48,9 +48,9 @@ describe('POST /acccountLookup', () => {
             },
             {
                 Redirect: {
-                    actionUrl: `${host}/transfer`,
-                },
-            },
+                    actionUrl: `${host}/transfer`
+                }
+            }
         ])
     })
 
@@ -60,9 +60,9 @@ describe('POST /acccountLookup', () => {
         expect(res.body).toStrictEqual([
             {
                 Redirect: {
-                    actionUrl: `${host}/accountRead?acct=111222`,
-                },
-            },
+                    actionUrl: `${host}/accountRead?acct=111222`
+                }
+            }
         ])
     })
 })
