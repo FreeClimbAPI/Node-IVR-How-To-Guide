@@ -25,8 +25,7 @@ describe('POST /accountNumberPrompt', () => {
                     prompts: [
                         {
                             Say: {
-                                text:
-                                    'Please Enter your account number'
+                                text: 'Please Enter your account number'
                             }
                         }
                     ]
@@ -46,7 +45,8 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: 'Error, please enter your six digit account number or press 0 to speak with an operator'
+                    text:
+                        'Error, please enter your six digit account number or press 0 to speak with an operator'
                 }
             },
             {
@@ -71,7 +71,8 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: 'Error, please enter your six digit account number or press 0 to speak with an operator'
+                    text:
+                        'Error, please enter your six digit account number or press 0 to speak with an operator'
                 }
             },
             {
@@ -105,7 +106,7 @@ describe('POST /accountNumber', () => {
                 Say: {
                     text: 'Max retry limit reached, please wait while we connect you to an operator'
                 }
-            }, 
+            },
             {
                 Pause: {
                     length: 100
@@ -120,7 +121,6 @@ describe('POST /accountNumber', () => {
     })
 
     it('returns a redirect to /accountNumberConfirmation on successful input of account number', async () => {
-
         const res = await request
             .post('/accountNumber')
             .type('form')
@@ -134,6 +134,4 @@ describe('POST /accountNumber', () => {
             }
         ])
     })
-
-
 })

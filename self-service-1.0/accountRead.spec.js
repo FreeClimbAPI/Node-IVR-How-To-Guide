@@ -12,16 +12,15 @@ beforeEach(() => {
 })
 
 describe('POST /acccountRead', () => {
-
     it('returns an error message and transfer to redirect if the given account is closed', async () => {
-        const res = await request
-            .post('/accountRead?acct=333444')
+        const res = await request.post('/accountRead?acct=333444')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "This account appears to be closed please wait while we transfer you to an operator for asistance",
-                },
+                    text:
+                        'This account appears to be closed please wait while we transfer you to an operator for asistance'
+                }
             },
             {
                 Redirect: {
@@ -32,14 +31,14 @@ describe('POST /acccountRead', () => {
     })
 
     it('returns the frequent buyer message and redirect to /transfer if the account is open and has the frequent buyer flag enabled', async () => {
-        const res = await request
-            .post('/accountRead?acct=111222')
+        const res = await request.post('/accountRead?acct=111222')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Welcome back platinum member, please wait while we connect you with a customer service representative.",
-                },
+                    text:
+                        'Welcome back platinum member, please wait while we connect you with a customer service representative.'
+                }
             },
             {
                 Pause: {
@@ -55,14 +54,14 @@ describe('POST /acccountRead', () => {
     })
 
     it('returns a last order message and redirect to /transfer if the account is open and has the frequent buyer flag disabled', async () => {
-        const res = await request
-            .post('/accountRead?acct=222333')
+        const res = await request.post('/accountRead?acct=222333')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Welcome back Jane Smith, I've found your most recent order from March 30th 2020, please hold while I connect you with a customer service representative. ",
-                },
+                    text:
+                        "Welcome back Jane Smith, I've found your most recent order from March 30th 2020, please hold while I connect you with a customer service representative. "
+                }
             },
             {
                 Pause: {
@@ -76,6 +75,4 @@ describe('POST /acccountRead', () => {
             },
         ])
     })
-
-     
 })

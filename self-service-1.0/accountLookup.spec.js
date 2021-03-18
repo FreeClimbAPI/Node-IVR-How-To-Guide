@@ -12,16 +12,14 @@ beforeEach(() => {
 })
 
 describe('POST /acccountLookup', () => {
-
     it('returns an error when the account number given does not match any known account number', async () => {
-        const res = await request
-            .post('/accountLookup?acct=000000')
+        const res = await request.post('/accountLookup?acct=000000')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Sorry, we couldnt find that account number.",
-                },
+                    text: 'Sorry, we couldnt find that account number.'
+                }
             },
             {
                 Redirect: {
@@ -33,17 +31,15 @@ describe('POST /acccountLookup', () => {
 
     it('returns a redirect /transfer when the number of lookup retries has exceeded the limit', async () => {
         for (let i = 0; i < 2; i++) {
-            await request
-                .post('/accountLookup?acct=000000')
+            await request.post('/accountLookup?acct=000000')
         }
-        const res = await request
-            .post('/accountLookup?acct=000000')
+        const res = await request.post('/accountLookup?acct=000000')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Max retry limit reached, please wait while we connect you to an operator",
-                },
+                    text: 'Max retry limit reached, please wait while we connect you to an operator'
+                }
             },
             {
                 Pause: {
@@ -59,9 +55,7 @@ describe('POST /acccountLookup', () => {
     })
 
     it('returns a redirect /accountRead when the account number matches a known account', async () => {
-       
-        const res = await request
-            .post('/accountLookup?acct=111222')
+        const res = await request.post('/accountLookup?acct=111222')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
             {
@@ -70,5 +64,5 @@ describe('POST /acccountLookup', () => {
                 },
             },
         ])
-    })    
+    })
 })

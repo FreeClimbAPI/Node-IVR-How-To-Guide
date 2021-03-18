@@ -11,10 +11,8 @@ beforeEach(() => {
     request = supertest(app)
 })
 
-
 describe('POST /confirmAccountNumberPrompt', () => {
     it('returns the percl commands for the account number confirmation menu getdigits including redirect and prompt', async () => {
-
         const res = await request.post('/confirmAccountNumberPrompt?acct=111222')
         expect(res.status).toBe(200)
         expect(res.body).toStrictEqual([
@@ -39,7 +37,6 @@ describe('POST /confirmAccountNumberPrompt', () => {
 })
 
 describe('POST /confirmAccountNumber', () => {
-
     it('returns an error when no menu options are selected', async () => {
         const res = await request
             .post('/confirmAccountNumber?acct=111222')
@@ -49,8 +46,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Error",
-                },
+                    text: 'Error'
+                }
             },
             {
                 Redirect: {
@@ -61,7 +58,6 @@ describe('POST /confirmAccountNumber', () => {
     })
 
     it('returns transfer to operator if max err limit reached', async () => {
-
         for (let i = 0; i <= 1; i++) {
             await request
                 .post('/confirmAccountNumber?acct=111222')
@@ -77,8 +73,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Error",
-                },
+                    text: 'Error'
+                }
             },
             {
                 Redirect: {
@@ -89,7 +85,6 @@ describe('POST /confirmAccountNumber', () => {
     })
 
     it('returns transfer to operator if max err limit reached', async () => {
-
         for (let i = 0; i < 3; i++) {
             await request
                 .post('/confirmAccountNumber?acct=111222')
@@ -105,8 +100,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Please wait while we connect you to an operator",
-                },
+                    text: 'Please wait while we connect you to an operator'
+                }
             },
             {
                 Pause: {
@@ -122,7 +117,6 @@ describe('POST /confirmAccountNumber', () => {
     })
 
     it('returns transfer to operator if max retry limit reached', async () => {
-
         for (let i = 0; i < 2; i++) {
             await request
                 .post('/confirmAccountNumber?acct=111222')
@@ -138,8 +132,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Please wait while we connect you to an operator",
-                },
+                    text: 'Please wait while we connect you to an operator'
+                }
             },
             {
                 Pause: {
@@ -152,11 +146,9 @@ describe('POST /confirmAccountNumber', () => {
                 },
             },
         ])
-
     })
 
     it('returns redirect to account number lookup on input of number 1', async () => {
-
         const res = await request
             .post('/confirmAccountNumber?acct=111222')
             .type('form')
@@ -165,8 +157,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "proceeding to account number lookup.",
-                },
+                    text: 'proceeding to account number lookup.'
+                }
             },
             {
                 Redirect: {
@@ -177,7 +169,6 @@ describe('POST /confirmAccountNumber', () => {
     })
 
     it('returns redirect to account number entry on in input of number 2', async () => {
-
         const res = await request
             .post('/confirmAccountNumber?acct=111222')
             .type('form')
@@ -186,8 +177,8 @@ describe('POST /confirmAccountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: "Ok",
-                },
+                    text: 'Ok'
+                }
             },
             {
                 Redirect: {
