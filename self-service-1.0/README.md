@@ -7,13 +7,23 @@
 [![Coverage Status](https://coveralls.io/repos/github/FreeClimbAPI/Node-2FA-Tutorial/badge.svg?branch=master)](https://coveralls.io/github/FreeClimbAPI/Node-IVR-Sample-Apps?branch=master)
 
 This project serves as a guide to help you build an application with FreeClimb. View this tutorial on (tutorial coming soon).  
+
 Specifically, the project will:
+- Answer an incoming call from the user
+- Collect DTMF input from the user
+- Route the users call based on DTMF input
 
-`TBD`
+## Requirements
+A [FreeClimb account](https://www.freeclimb.com/dashboard/signup/)
 
-## Setting up your new app within your FreeClimb account
+A [registered application](https://docs.freeclimb.com/docs/registering-and-configuring-an-application#register-an-app) with a named alias
 
-To get started using a FreeClimb account, follow the instructions [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb).
+A [configured FreeClimb number](https://docs.freeclimb.com/docs/getting-and-configuring-a-freeclimb-number) assigned to your application
+
+Tools:
+- [Node.js](https://nodejs.org/en/download/) 12.14.0 or later
+- [Yarn](https://yarnpkg.com/en/)
+- [dotenv-safe](https://www.npmjs.com/package/dotenv-safe)
 
 ## Setting up the Tutorial
 
