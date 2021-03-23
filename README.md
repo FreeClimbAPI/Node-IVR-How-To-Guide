@@ -1,10 +1,10 @@
 # Node IVR Sample Apps
 
-FreeClimb’s Interactive Voice Response (IVR) feature allows for automated interactions between FreeClimb and the caller where the caller responds with voice and/or keypad inputs (aka DTMF). Read our [Building an IVR](https://docs.freeclimb.com/docs/building-an-ivr) guide for more information. 
+FreeClimb’s Interactive Voice Response (IVR) feature allows for automated interactions between FreeClimb and the caller where the caller responds with voice and/or [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) (e.g. keyapd) inputs. Read our [Building an IVR](https://docs.freeclimb.com/docs/building-an-ivr) guide for more information. 
 
 This repo offers five variations of an IVR application: 
-- [Call routing 1.0: DTMF](call-router-1.0)
-- [Call routing 2.0: DTMF and voice-enabled](call-router-2.0)
+- [Call routing: DTMF](call-router-1.0)
+- [Call routing: Voice-enabled DTMF](call-router-2.0)
 - Self-service 1.0 (coming soon)
 - Self-service 1.5 (coming soon)
 - Self-service 2.0 (coming soon)
@@ -15,10 +15,14 @@ We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.c
 ## Requirements
 A [FreeClimb account](https://freeclimb.com/dashboard/)
 
+A [registered application](https://docs.freeclimb.com/docs/registering-and-configuring-an-application) with a named alias
+
+A [configured FreeClimb number](https://docs.freeclimb.com/docs/getting-and-configuring-a-freeclimb-number)
+
 Tools:
 - [Node.js](https://nodejs.org/en/download/) version 12.14.0 or higher
 - [Yarn](https://yarnpkg.com/en/)
-- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [ngrok](https://ngrok.com/download) (optional for hosting)
 
 ## Feedback & Issues
 If you would like to give the team feedback or you encounter a problem, please [contact support](https://www.freeclimb.com/support/) or [submit a ticket](https://freeclimb.com/dashboard/portal/support) in the dashboard
