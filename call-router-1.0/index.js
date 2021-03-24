@@ -31,7 +31,8 @@ app.post('/incomingCall', (req, res) => {
 app.post('/mainMenuPrompt', (req, res) => {
     res.status(200).json(
         freeclimb.percl.build(
-            freeclimb.percl.getDigits(`${host}/mainMenu`, { // once dtmf input is collected redirect to main menu for further routing
+            freeclimb.percl.getDigits(`${host}/mainMenu`, {
+                // once dtmf input is collected redirect to main menu for further routing
                 prompts: [
                     freeclimb.percl.say(
                         'Press 1 for existing orders, 2 for new orders, or 0 to speak to an operator'
@@ -66,7 +67,8 @@ app.post('/mainMenu', (req, res) => {
         ],
         ['0', { script: 'Redirecting you to an operator', redirect: `${host}/transfer` }]
     ])
-    if ((!digits || !menuOpts.get(digits)) && mainMenuErrCount < 3) { // error counting keeps bad actors from cycling within your applications
+    if ((!digits || !menuOpts.get(digits)) && mainMenuErrCount < 3) {
+        // error counting keeps bad actors from cycling within your applications
         mainMenuErrCount++
         res.status(200).json(
             freeclimb.percl.build(
@@ -74,11 +76,12 @@ app.post('/mainMenu', (req, res) => {
                 freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
             )
         )
-    } else if (mainMenuErrCount >= 3) { // we recommend giving your customers 3 tries before ending the call 
+    } else if (mainMenuErrCount >= 3) {
+        // we recommend giving your customers 3 tries before ending the call
         mainMenuErrCount = 0
         res.status(200).json(
             freeclimb.percl.build(
-                freeclimb.percl.say('Max retry limit reached'), 
+                freeclimb.percl.say('Max retry limit reached'),
                 freeclimb.percl.pause(100),
                 freeclimb.percl.redirect(`${host}/endCall`)
             )

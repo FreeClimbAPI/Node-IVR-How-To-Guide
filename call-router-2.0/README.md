@@ -9,14 +9,17 @@
 This project serves as a guide to help you build a basic IVR [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) and voice-enabled call routing application with [FreeClimb](https://docs.freeclimb.com/docs/how-freeclimb-works).
 
 Specifically, the project will:
+
 - Answer an incoming call from the user
 - Collect DTMF and/or speech input from the user
 - Route the users call based on DTMF and/or speech input
 
 ## Tutorial
+
 We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/two-factor-authentication-tutorial) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
+
 A [FreeClimb account](https://www.freeclimb.com/dashboard/signup/)
 
 A [registered application](https://docs.freeclimb.com/docs/registering-and-configuring-an-application#register-an-app) with a named alias
@@ -24,6 +27,7 @@ A [registered application](https://docs.freeclimb.com/docs/registering-and-confi
 A [configured FreeClimb number](https://docs.freeclimb.com/docs/getting-and-configuring-a-freeclimb-number) assigned to your application
 
 Tools:
+
 - [Node.js](https://nodejs.org/en/download/) 12.14.0 or later
 - [Yarn](https://yarnpkg.com/en/)
 - [ngrok](https://ngrok.com/download) (optional for hosting)
@@ -38,12 +42,12 @@ Tools:
 
 1. Create a .env file and configure the following environment variables within it:
 
-   | ENV VARIABLE    | DESCRIPTION                                                                                                                                                                                                                               |
-   | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | ACCOUNT_ID      | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                            |
-    | AUTH_TOKEN      | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard                                                                                                  |
-    | HOST            | The hostname as defined in your FC application. We recommend [ngrok](https://ngrok.com/download) as an option to get up and running quickly.                                                                                                                                                                                             |
-    | PORT            | Specifies the port on which the app will run (e.g. PORT=3000 means you would direct your browser to http://localhost:3000).                                                                                                                                                                                              |
+   | ENV VARIABLE | DESCRIPTION                                                                                                                                  |
+   | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+   | ACCOUNT_ID   | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard               |
+   | AUTH_TOKEN   | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard     |
+   | HOST         | The hostname as defined in your FC application. We recommend [ngrok](https://ngrok.com/download) as an option to get up and running quickly. |
+   | PORT         | Specifies the port on which the app will run (e.g. PORT=3000 means you would direct your browser to http://localhost:3000).                  |
 
 ## Running the Sample App
 
@@ -52,4 +56,5 @@ yarn start
 ```
 
 ## Feedback & Issues
+
 If you would like to give the team feedback or you encounter a problem, please [contact support](https://www.freeclimb.com/support/) or [submit a ticket](https://freeclimb.com/dashboard/portal/support) in the dashboard.

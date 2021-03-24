@@ -109,7 +109,8 @@ app.post('/mainMenu', (req, res) => {
     ])
   }
 
-  if ((!response || !menuOpts.get(response)) && mainMenuErrCount < 3) { // error counting keeps bad actors from cycling within your applications
+  if ((!response || !menuOpts.get(response)) && mainMenuErrCount < 3) {
+    // error counting keeps bad actors from cycling within your applications
     mainMenuErrCount++
     res
       .status(200)
@@ -119,7 +120,8 @@ app.post('/mainMenu', (req, res) => {
           freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
         )
       )
-  } else if (mainMenuErrCount >= 3) { // we recommend giving your customers 3 tries before ending the call 
+  } else if (mainMenuErrCount >= 3) {
+    // we recommend giving your customers 3 tries before ending the call
     mainMenuErrCount = 0
     res
       .status(200)
