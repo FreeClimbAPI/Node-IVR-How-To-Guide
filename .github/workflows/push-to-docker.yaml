@@ -48,7 +48,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          file: ./call-router-2.0/Dockerfile
-          context: ./call-router-2.0
+          file: ./self-service-1.5/Dockerfile
+          context: ./self-service-1.5
           tags: freeclimbapi/node-ivr-sample-self-service-1.5:latest
           push: true
