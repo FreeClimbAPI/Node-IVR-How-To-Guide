@@ -5,9 +5,9 @@ FreeClimb’s Interactive Voice Response (IVR) feature allows for automated inte
 This repo offers five variations of an IVR application: 
 - [Call routing: DTMF](call-router-1.0)
 - [Call routing: Voice-enabled DTMF](call-router-2.0)
-- Self-service 1.0 (coming soon)
-- Self-service 1.5 (coming soon)
-- Self-service 2.0 (coming soon)
+- [Self-service 1.0](self-service-1.0)
+- [Self-service 1.5](self-service-1.5)
+- [Self-service 2.0](self-service-2.0)
 
 ## Tutorial
 We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
