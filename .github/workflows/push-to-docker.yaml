@@ -39,6 +39,22 @@ jobs:
           context: ./call-router-2.0
           tags: freeclimbapi/node-ivr-sample-call-router-2.0:latest
           push: true
+  self_service_1_0:      
+    name: Build & Push Self Service 1.0
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          file: ./self-service-1.0/Dockerfile
+          context: ./self-service-1.0
+          tags: freeclimbapi/node-ivr-sample-self-service-1.0:latest
+          push: true
   self_service_1_5:
     name: Build & Push Self Service 1.5
     runs-on: ubuntu-latest
@@ -55,3 +71,20 @@ jobs:
           context: ./self-service-1.5
           tags: freeclimbapi/node-ivr-sample-self-service-1.5:latest
           push: true
+  self_service_2_0:
+    name: Build & Push Self Service 2.0
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          file: ./self-service-2.0/Dockerfile
+          context: ./self-service-2.0
+          tags: freeclimbapi/node-ivr-sample-self-service-2.0:latest
+          push: true
+
