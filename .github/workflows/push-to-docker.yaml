@@ -9,6 +9,7 @@ on:
 jobs:
   call_router_1_0:
     name: Build & Push Call Router 1.0
+    runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -24,6 +25,7 @@ jobs:
           push: true
   call_router_2_0:
     name: Build & Push Call Router 2.0
+    runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -39,6 +41,7 @@ jobs:
           push: true
   self_service_1_5:
     name: Build & Push Self Service 1.5
+    runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1

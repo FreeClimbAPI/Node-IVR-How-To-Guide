@@ -9,7 +9,7 @@ defaults:
     working-directory: self-service-2.0
 
 jobs:
-  self_service_2.0:
+  self_service_2_0:
     name: Self Service 2.0
     strategy:
       matrix:
