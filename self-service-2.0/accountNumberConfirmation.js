@@ -53,7 +53,13 @@ router.post('/confirmAccountNumber', (req, res) => {
                     redirect: `${host}/accountNumberPrompt`
                 }
             ],
-            ['0', { audioUrl: `${host}/accountNumberConfirmationAudio?audio=operator.wav`, redirect: `${host}/transfer` }]
+            [
+                '0',
+                {
+                    audioUrl: `${host}/accountNumberConfirmationAudio?audio=operator.wav`,
+                    redirect: `${host}/transfer`
+                }
+            ]
         ])
     } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
         menuOpts = new Map([
@@ -71,7 +77,13 @@ router.post('/confirmAccountNumber', (req, res) => {
                     redirect: `${host}/accountNumberPrompt`
                 }
             ],
-            ['OPERATOR', { audioUrl: `${host}/accountNumberConfirmationAudio?audio=operator.wav`, redirect: `${host}/transfer` }]
+            [
+                'OPERATOR',
+                {
+                    audioUrl: `${host}/accountNumberConfirmationAudio?audio=operator.wav`,
+                    redirect: `${host}/transfer`
+                }
+            ]
         ])
     }
 
@@ -115,7 +127,7 @@ router.get('/accountNumberConfirmationGrammar', function (req, res) {
     res.download(file)
 })
 
-router.get('/accountNumberConfirmationAudio',function(req,res) {
+router.get('/accountNumberConfirmationAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/accountNumberConfirmation/${req.param('audio')}`
     res.download(file)
 })

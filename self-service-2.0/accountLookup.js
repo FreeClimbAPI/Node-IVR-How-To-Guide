@@ -23,9 +23,7 @@ router.post('/accountLookup', (req, res) => {
         retries = 0
         res.status(200).json(
             freeclimb.percl.build(
-                freeclimb.percl.play(
-                    `${host}/accountLookupAudio?audio=maxRetry.wav`
-                ),
+                freeclimb.percl.play(`${host}/accountLookupAudio?audio=maxRetry.wav`),
                 freeclimb.percl.pause(100),
                 freeclimb.percl.redirect(`${host}/transfer`)
             )
@@ -39,11 +37,9 @@ router.post('/accountLookup', (req, res) => {
     }
 })
 
-router.get('/accountLookupAudio',function(req,res) {
+router.get('/accountLookupAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/accountLookup/${req.param('audio')}`
     res.download(file)
 })
-
-
 
 module.exports = router

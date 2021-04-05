@@ -18,7 +18,7 @@ describe('POST /inComingCall', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/indexAudio?audio=greeting.wav`
+                    file: `${host}/indexAudio?audio=greeting.wav`
                 }
             },
             {
@@ -42,7 +42,7 @@ describe('POST /transfer', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/indexAudio?audio=transfer.wav`
+                    file: `${host}/indexAudio?audio=transfer.wav`
                 }
             },
             {
@@ -61,7 +61,7 @@ describe('POST /endCall', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/indexAudio?audio=hangup.wav`
+                    file: `${host}/indexAudio?audio=hangup.wav`
                 }
             },
             {

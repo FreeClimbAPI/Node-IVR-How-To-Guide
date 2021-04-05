@@ -23,7 +23,7 @@ describe('POST /accountNumberPrompt', () => {
                     prompts: [
                         {
                             Play: {
-                                file:  `${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav`
+                                file: `${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav`
                             }
                         }
                     ]
@@ -43,7 +43,7 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/accountNumberEntryAudio?audio=shortError.wav`
+                    file: `${host}/accountNumberEntryAudio?audio=shortError.wav`
                 }
             },
             {
@@ -69,7 +69,7 @@ describe('POST /accountNumber', () => {
             {
                 Play: {
                     file: `${host}/accountNumberEntryAudio?audio=shortError.wav`
-                },
+                }
             },
             {
                 Pause: {

@@ -16,9 +16,7 @@ router.post('/accountRead', (req, res) => {
         if (account.frequentBuyer) {
             res.status(200).json(
                 freeclimb.percl.build(
-                    freeclimb.percl.play(
-                        `${host}/accountReadAudio?audio=platinumAccount.wav`
-                    ),
+                    freeclimb.percl.play(`${host}/accountReadAudio?audio=platinumAccount.wav`),
                     freeclimb.percl.pause(100),
                     freeclimb.percl.redirect(`${host}/transfer`)
                 )
@@ -37,16 +35,14 @@ router.post('/accountRead', (req, res) => {
     } else {
         res.status(200).json(
             freeclimb.percl.build(
-                freeclimb.percl.play(
-                    `${host}/accountReadAudio?audio=closedAccount.wav`
-                ),
+                freeclimb.percl.play(`${host}/accountReadAudio?audio=closedAccount.wav`),
                 freeclimb.percl.redirect(`${host}/transfer`)
             )
         )
     }
 })
 
-router.get('/accountReadAudio',function(req,res) {
+router.get('/accountReadAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/accountRead/${req.param('audio')}`
     res.download(file)
 })

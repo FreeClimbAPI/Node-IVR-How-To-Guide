@@ -16,9 +16,7 @@ router.post('/mainMenuPrompt', (req, res) => {
             freeclimb.percl.getSpeech(`${host}/mainMenu`, `${host}/mainMenuGrammar`, {
                 grammarType: freeclimb.enums.grammarType.URL,
                 grammarRule: 'option',
-                prompts: [
-                    freeclimb.percl.play(`${host}/mainMenuAudio?audio=mainMenuPrompt.wav`)
-                ]
+                prompts: [freeclimb.percl.play(`${host}/mainMenuAudio?audio=mainMenuPrompt.wav`)]
             })
         )
     )
@@ -44,7 +42,13 @@ router.post('/mainMenu', (req, res) => {
                     redirect: `${host}/transfer`
                 }
             ],
-            ['0', { audioUrl: `${host}/mainMenuAudio?audio=operator.wav`, redirect: `${host}/transfer` }]
+            [
+                '0',
+                {
+                    audioUrl: `${host}/mainMenuAudio?audio=operator.wav`,
+                    redirect: `${host}/transfer`
+                }
+            ]
         ])
     } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
         menuOpts = new Map([
@@ -62,7 +66,13 @@ router.post('/mainMenu', (req, res) => {
                     redirect: `${host}/transfer`
                 }
             ],
-            ['OPERATOR', { audioUrl: `${host}/mainMenuAudio?audio=operator.wav`, redirect: `${host}/transfer` }]
+            [
+                'OPERATOR',
+                {
+                    audioUrl: `${host}/mainMenuAudio?audio=operator.wav`,
+                    redirect: `${host}/transfer`
+                }
+            ]
         ])
     }
 
@@ -99,7 +109,7 @@ router.get('/mainMenuGrammar', function (req, res) {
     res.download(file)
 })
 
-router.get('/mainMenuAudio',function(req,res) {
+router.get('/mainMenuAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/mainMenu/${req.param('audio')}`
     res.download(file)
 })

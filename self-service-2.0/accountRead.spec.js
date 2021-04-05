@@ -18,7 +18,7 @@ describe('POST /acccountRead', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/accountReadAudio?audio=closedAccount.wav`
+                    file: `${host}/accountReadAudio?audio=closedAccount.wav`
                 }
             },
             {
@@ -35,7 +35,7 @@ describe('POST /acccountRead', () => {
         expect(res.body).toStrictEqual([
             {
                 Play: {
-                    file:  `${host}/accountReadAudio?audio=platinumAccount.wav`
+                    file: `${host}/accountReadAudio?audio=platinumAccount.wav`
                 }
             },
             {

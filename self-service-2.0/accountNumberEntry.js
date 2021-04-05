@@ -18,7 +18,9 @@ router.post('/accountNumberPrompt', (req, res) => {
                 {
                     grammarType: freeclimb.enums.grammarType.BUILTIN,
                     prompts: [
-                        freeclimb.percl.play(`${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav`)
+                        freeclimb.percl.play(
+                            `${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav`
+                        )
                     ]
                 }
             )
@@ -58,7 +60,7 @@ router.post('/accountNumber', (req, res) => {
     }
 })
 
-router.get('/accountNumberEntryAudio',function(req,res) {
+router.get('/accountNumberEntryAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/accountNumberEntry/${req.param('audio')}`
     res.download(file)
 })
