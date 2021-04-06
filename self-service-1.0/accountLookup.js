@@ -11,7 +11,7 @@ router = express.Router()
 let retries = 0
 
 router.post('/accountLookup', (req, res) => {
-  if (!accounts.get(req.param('acct'))) {
+  if (!accounts.get(req.param('acct')) && retries < 2) {
     retries++
     res
       .status(200)
