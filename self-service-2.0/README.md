@@ -1,4 +1,4 @@
-# Node IVR Self Service Application 1.5
+# Node IVR Self Service Application 2.0
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -11,6 +11,7 @@ This project serves as a guide to help you build an application with FreeClimb. 
 Specifically, the project will:
 - Answer an incoming call from the user
 - Collect DTMF input from the user
+- Playback pre-recorded audio prompts
 - Route the users call based on DTMF input
 
 ## Requirements

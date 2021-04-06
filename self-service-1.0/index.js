@@ -24,45 +24,45 @@ app.use('/', accountLookupRoutes)
 app.use('/', accountReadRoutes)
 
 app.post('/incomingCall', (req, res) => {
-    res
-        .status(200)
-        .json(
-            freeclimb.percl.build(
-                freeclimb.percl.say('Welcome to the Node self service IVR.'),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-            )
-        )
+  res
+    .status(200)
+    .json(
+      freeclimb.percl.build(
+        freeclimb.percl.say('Welcome to the Node self service IVR.'),
+        freeclimb.percl.pause(100),
+        freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
+      )
+    )
 })
 
 app.post('/transfer', (req, res) => {
-    res
-        .status(200)
-        .json(
-            freeclimb.percl.build(
-                freeclimb.percl.say('there are no operators available at this time'),
-                freeclimb.percl.redirect(`${host}/endCall`)
-            )
-        )
+  res
+    .status(200)
+    .json(
+      freeclimb.percl.build(
+        freeclimb.percl.say('there are no operators available at this time'),
+        freeclimb.percl.redirect(`${host}/endCall`)
+      )
+    )
 })
 
 app.post('/endCall', (req, res) => {
-    res
-        .status(200)
-        .json(
-            freeclimb.percl.build(
-                freeclimb.percl.say(
-                    'Thank you for calling the Node self service IVR , have a nice day!'
-                ),
-                freeclimb.percl.hangup()
-            )
-        )
+  res
+    .status(200)
+    .json(
+      freeclimb.percl.build(
+        freeclimb.percl.say(
+          'Thank you for calling the Node self service IVR , have a nice day!'
+        ),
+        freeclimb.percl.hangup()
+      )
+    )
 })
 
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(port, () => {
-        console.log(`Starting server on port ${port}`)
-    })
+  app.listen(port, () => {
+    console.log(`Starting server on port ${port}`)
+  })
 }
 
 module.exports = { app }
