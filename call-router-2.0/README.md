@@ -6,7 +6,7 @@
 [![Build Status](https://github.com/FreeClimbAPI/Node-IVR-Sample-Apps/actions/workflows/node-ivr-sample-app-call-router-2.0.yaml/badge.svg)](https://github.com/FreeClimbAPI/Node-IVR-Sample-Apps/actions/workflows/node-ivr-sample-app-call-router-2.0.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/FreeClimbAPI/Node-2FA-Tutorial/badge.svg?branch=master)](https://coveralls.io/github/FreeClimbAPI/Node-IVR-Sample-Apps?branch=master)
 
-This project serves as a guide to help you build a basic IVR [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) and voice-enabled call routing application with [FreeClimb](https://docs.freeclimb.com/docs/how-freeclimb-works).
+This project serves as a guide to help you build a basic [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) and voice-enabled IVR call routing application with [FreeClimb](https://docs.freeclimb.com/docs/how-freeclimb-works).
 
 Specifically, the project will:
 
@@ -16,7 +16,7 @@ Specifically, the project will:
 
 ## Tutorial
 
-We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/two-factor-authentication-tutorial) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
+We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
 
