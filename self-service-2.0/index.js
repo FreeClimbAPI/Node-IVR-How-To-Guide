@@ -51,7 +51,7 @@ app.post('/endCall', (req, res) => {
     )
 })
 
-router.get('/indexAudio', function (req, res) {
+app.get('/indexAudio', function (req, res) {
     const file = `${__dirname}/audioFiles/index/${req.param('audio')}`
     res.download(file)
 })
