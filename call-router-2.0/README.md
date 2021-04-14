@@ -44,8 +44,8 @@ Tools:
 
    | ENV VARIABLE | DESCRIPTION                                                                                                                                  |
    | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-   | ACCOUNT_ID   | Account ID which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard               |
-   | AUTH_TOKEN   | Authentication Token which can be found under [API Keys](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard     |
+   | ACCOUNT_ID   | Account ID which can be found under [API credentials](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard               |
+   | API_KEY   | API key which can be found under [API credentials](https://www.freeclimb.com/dashboard/portal/account/authentication) in Dashboard     |
    | HOST         | The hostname as defined in your FC application. We recommend [ngrok](https://ngrok.com/download) as an option to get up and running quickly. |
    | PORT         | Specifies the port on which the app will run (e.g. PORT=3000 means you would direct your browser to http://localhost:3000).                  |
 
