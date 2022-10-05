@@ -18,6 +18,7 @@ describe('POST /acccountLookup', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Sorry, we couldnt find that account number.'
                 }
             },
@@ -38,6 +39,7 @@ describe('POST /acccountLookup', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Max retry limit reached, please wait while we connect you to an operator'
                 }
             },

@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@freeclimb/sdk": "^1.1.1",
+    "@freeclimb/sdk": "^3.0.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "dotenv-safe": "^8.2.0",

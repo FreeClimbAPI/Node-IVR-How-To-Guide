@@ -18,6 +18,7 @@ describe('POST /acccountRead', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'This account appears to be closed please wait while we transfer you to an operator for asistance'
         }
@@ -36,6 +37,7 @@ describe('POST /acccountRead', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'Welcome back platinum member, please wait while we connect you with a customer service representative.'
         }
@@ -59,6 +61,7 @@ describe('POST /acccountRead', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             "Welcome back Jane Smith, I've found your most recent order from March 30th 2020, please hold while I connect you with a customer service representative. "
         }

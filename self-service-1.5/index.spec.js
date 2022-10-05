@@ -18,6 +18,7 @@ describe('POST /inComingCall', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Welcome to the Node self service IVR.'
                 }
             },
@@ -42,6 +43,7 @@ describe('POST /transfer', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'there are no operators available at this time'
                 }
             },
@@ -61,6 +63,7 @@ describe('POST /endCall', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Thank you for calling the Node self service IVR , have a nice day!'
                 }
             },

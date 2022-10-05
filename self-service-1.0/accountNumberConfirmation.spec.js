@@ -25,6 +25,7 @@ describe('POST /confirmAccountNumberPrompt', () => {
           prompts: [
             {
               Say: {
+                loop: 1,
                 text:
                   'You entered 111222 is that correct? Press 1 to confirm your account number or 2 to try again'
               }
@@ -46,6 +47,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Error'
         }
       },
@@ -73,6 +75,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Error'
         }
       },
@@ -100,6 +103,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Please wait while we connect you to an operator'
         }
       },
@@ -132,6 +136,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Please wait while we connect you to an operator'
         }
       },
@@ -157,6 +162,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'proceeding to account number lookup.'
         }
       },
@@ -177,6 +183,7 @@ describe('POST /confirmAccountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Ok'
         }
       },

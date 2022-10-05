@@ -5,14 +5,14 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetSpeech, Hangup } = require('@freeclimb/sdk')
 
 // global variables
 const port = process.env.PORT || 3000
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 
 // set error counter to zero
 let mainMenuErrCount = 0
@@ -22,28 +22,34 @@ app.post('/incomingCall', (req, res) => {
   res
     .status(200)
     .json(
-      freeclimb.percl.build(
-        freeclimb.percl.say('Welcome to the Node IVR Sample app baseline.'),
-        freeclimb.percl.pause(100),
-        freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-      )
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Welcome to the Node IVR Sample app baseline.' }),
+          new Pause({ length: 100 }),
+          new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+        ]
+      }).build()
     )
 })
 
 // collect voice and/or dtmf input from the user to direct them to their next destination
 app.post('/mainMenuPrompt', (req, res) => {
   res.status(200).json(
-    freeclimb.percl.build(
-      freeclimb.percl.getSpeech(`${host}/mainMenu`, `${host}/mainMenuGrammar`, {
-        grammarType: freeclimb.enums.grammarType.URL,
-        grammarRule: 'option',
-        prompts: [
-          freeclimb.percl.say(
-            'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
-          )
-        ]
-      })
-    )
+    new PerclScript({
+      commands: [
+        new GetSpeech({
+          actionUrl: `${host}/mainMenu`,
+          grammarFile: `${host}/mainMenuGrammar`,
+          grammarType: 'URL',
+          grammarRule: 'option',
+          prompts: [
+            new Say({
+              text: 'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
+            })
+          ]
+        })
+      ]
+    }).build()
   )
 })
 
@@ -59,7 +65,7 @@ app.post('/mainMenu', (req, res) => {
   const getSpeechResponse = req.body
   const response = getSpeechResponse.recognitionResult
 
-  if (req.body.reason === freeclimb.enums.getSpeechReason.DIGIT) {
+  if (req.body.reason === 'digit') {
     menuOpts = new Map([
       [
         '1',
@@ -83,7 +89,7 @@ app.post('/mainMenu', (req, res) => {
         }
       ]
     ])
-  } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
+  } else if (req.body.reason === 'recognition') {
     menuOpts = new Map([
       [
         'EXISTING',
@@ -115,10 +121,12 @@ app.post('/mainMenu', (req, res) => {
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say('Error, please try again'),
-          freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: 'Error, please try again' }),
+            new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+          ]
+        }).build()
       )
   } else if (mainMenuErrCount >= 3) {
     // we recommend giving your customers 3 tries before ending the call
@@ -126,21 +134,25 @@ app.post('/mainMenu', (req, res) => {
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say('Max retry limit reached'),
-          freeclimb.percl.pause(100),
-          freeclimb.percl.redirect(`${host}/endCall`)
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: 'Max retry limit reached' }),
+            new Pause({ length: 100 }),
+            new Redirect({ actionUrl: `${host}/endCall` })
+          ]
+        }).build()
       )
   } else {
     mainMenuErrCount = 0
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say(menuOpts.get(response).script),
-          freeclimb.percl.redirect(menuOpts.get(response).redirect)
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: menuOpts.get(response).script }),
+            new Redirect({ actionUrl: menuOpts.get(response).redirect })
+          ]
+        }).build()
       )
   }
 })
@@ -150,10 +162,12 @@ app.post('/transfer', (req, res) => {
   res
     .status(200)
     .json(
-      freeclimb.percl.build(
-        freeclimb.percl.say('Please wait while we transfer you to an operator'),
-        freeclimb.percl.redirect(`${host}/endCall`)
-      )
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Please wait while we transfer you to an operator' }),
+          new Redirect({ actionUrl: `${host}/endCall` })
+        ]
+      }).build()
     )
 })
 
@@ -162,12 +176,12 @@ app.post('/endCall', (req, res) => {
   res
     .status(200)
     .json(
-      freeclimb.percl.build(
-        freeclimb.percl.say(
-          'Thank you for calling the Node IVR sample app baseline, have a nice day!'
-        ),
-        freeclimb.percl.hangup()
-      )
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Thank you for calling the Node IVR sample app baseline, have a nice day!' }),
+          new Hangup({})
+        ]
+      }).build()
     )
 })
 

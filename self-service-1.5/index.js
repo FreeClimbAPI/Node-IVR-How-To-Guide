@@ -4,13 +4,13 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetDigits, Hangup } = require('@freeclimb/sdk')
 
 const port = process.env.PORT || 3000
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 const mainMenuRoutes = require('./mainMenu')
 const accountNumberEntryRoutes = require('./accountNumberEntry')
 const accountNumberConfirmationRoutes = require('./accountNumberConfirmation')
@@ -25,31 +25,36 @@ app.use('/', accountReadRoutes)
 
 app.post('/incomingCall', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.say('Welcome to the Node self service IVR.'),
-            freeclimb.percl.pause(100),
-            freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-        )
+        new PerclScript({
+            commands: [
+                new Say({ text: 'Welcome to the Node self service IVR.' }),
+                new Pause({ length: 100 }),
+                new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+
+            ]
+        }).build()
     )
 })
 
 app.post('/transfer', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.say('there are no operators available at this time'),
-            freeclimb.percl.redirect(`${host}/endCall`)
-        )
+        new PerclScript({
+            commands: [
+                new Say({ text: 'there are no operators available at this time' }),
+                new Redirect({ actionUrl: `${host}/endCall` })
+            ]
+        }).build()
     )
 })
 
 app.post('/endCall', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.say(
-                'Thank you for calling the Node self service IVR , have a nice day!'
-            ),
-            freeclimb.percl.hangup()
-        )
+        new PerclScript({
+            commands: [
+                new Say({ text: 'Thank you for calling the Node self service IVR , have a nice day!'  }),
+                new Hangup({})
+            ]
+        }).build()
     )
 })
 

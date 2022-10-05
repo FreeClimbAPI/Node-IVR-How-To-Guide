@@ -20,6 +20,7 @@ describe('POST /accountNumberPrompt', () => {
                 GetSpeech: {
                     actionUrl: `${host}/accountNumber`,
                     grammarFile: 'ANY_DIG',
+                    grammarType: 'BUILTIN',
                     prompts: [
                         {
                             Play: {

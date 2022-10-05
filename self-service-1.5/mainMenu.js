@@ -1,10 +1,10 @@
 require('dotenv-safe').config()
 const express = require('express')
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Say, Redirect, Pause } = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 
 router = express.Router()
 
@@ -12,17 +12,19 @@ let mainMenuErrCount = 0
 
 router.post('/mainMenuPrompt', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.getSpeech(`${host}/mainMenu`, `${host}/mainMenuGrammar`, {
-                grammarType: freeclimb.enums.grammarType.URL,
-                grammarRule: 'option',
-                prompts: [
-                    freeclimb.percl.say(
-                        'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
-                    )
-                ]
-            })
-        )
+        new PerclScript({
+            commands: [
+                new GetSpeech({
+                    actionUrl: `${host}/mainMenu`,
+                    grammarFile: `${host}/mainMenuGrammar`,
+                    grammarType: 'URL',
+                    grammarRule: 'option',
+                    prompts: [
+                        new Say({ text: 'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator' })
+                    ]
+                })
+            ]
+        }).build()
     )
 })
 
@@ -30,7 +32,7 @@ router.post('/mainMenu', (req, res) => {
     let menuOpts
     const getSpeechResponse = req.body
     const response = getSpeechResponse.recognitionResult
-    if (req.body.reason === freeclimb.enums.getSpeechReason.DIGIT) {
+    if (req.body.reason === 'digit') {
         menuOpts = new Map([
             [
                 '1',
@@ -48,7 +50,7 @@ router.post('/mainMenu', (req, res) => {
             ],
             ['0', { script: 'Redirecting you to an operator', redirect: `${host}/transfer` }]
         ])
-    } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
+    } else if (req.body.reason === 'recognition') {
         menuOpts = new Map([
             [
                 'EXISTING',
@@ -71,27 +73,34 @@ router.post('/mainMenu', (req, res) => {
     if ((!response || !menuOpts.get(response)) && mainMenuErrCount < 3) {
         mainMenuErrCount++
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say('Error, please try again'),
-                freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-            )
+            new PerclScript({
+                commands: [
+                    new Say({ text: 'Error, please try again' }),
+                    new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+
+                ]
+            }).build()
         )
     } else if (mainMenuErrCount >= 3) {
         mainMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say('Max retry limit reached'),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/endCall`)
-            )
+            new PerclScript({
+                commands: [
+                    new Say({ text: 'Max retry limit reached' }),
+                    new Pause({ length: 100 }),
+                    new Redirect({ actionUrl: `${host}/endCall` })
+                ]
+            }).build()
         )
     } else {
         mainMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say(menuOpts.get(response).script),
-                freeclimb.percl.redirect(menuOpts.get(response).redirect)
-            )
+            new PerclScript({
+                commands: [
+                    new Say({ text: menuOpts.get(response).script }),
+                    new Redirect({ actionUrl: menuOpts.get(response).redirect })
+                ]
+            }).build()
         )
     }
 })

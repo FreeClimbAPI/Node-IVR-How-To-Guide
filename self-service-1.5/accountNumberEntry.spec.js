@@ -20,9 +20,11 @@ describe('POST /accountNumberPrompt', () => {
                 GetSpeech: {
                     actionUrl: `${host}/accountNumber`,
                     grammarFile: 'ANY_DIG',
+                    grammarType: 'BUILTIN',
                     prompts: [
                         {
                             Say: {
+                                loop: 1,
                                 text: 'Please enter or say your six digit account number'
                             }
                         }
@@ -43,6 +45,7 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Error'
                 }
             },
@@ -68,6 +71,7 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Error'
                 }
             },
@@ -100,6 +104,7 @@ describe('POST /accountNumber', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text: 'Max retry limit reached, please wait while we connect you to an operator'
                 }
             },

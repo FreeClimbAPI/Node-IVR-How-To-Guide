@@ -17,7 +17,8 @@ describe('POST /inComingCall', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
-          text: 'Welcome to the Node IVR Sample app baseline.'
+          text: 'Welcome to the Node IVR Sample app baseline.',
+          loop: 1
         }
       },
       {
@@ -48,6 +49,7 @@ describe('POST /mainMenuPrompt', () => {
           prompts: [
             {
               Say: {
+                loop: 1,
                 text:
                   'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
               }
@@ -69,6 +71,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting you to an operator'
         }
       },
@@ -89,6 +92,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting you to an operator'
         }
       },
@@ -109,6 +113,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting your call to existing orders.'
         }
       },
@@ -129,6 +134,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting your call to existing orders.'
         }
       },
@@ -149,6 +155,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting your call to new orders.'
         }
       },
@@ -169,6 +176,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Redirecting your call to new orders.'
         }
       },
@@ -189,6 +197,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Error, please try again'
         }
       },
@@ -209,6 +218,7 @@ describe('POST /mainMenu', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Error, please try again'
         }
       },
@@ -228,6 +238,7 @@ describe('POST /transfer', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text: 'Please wait while we transfer you to an operator'
         }
       },
@@ -247,6 +258,7 @@ describe('POST /endCall', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'Thank you for calling the Node IVR sample app baseline, have a nice day!'
         }

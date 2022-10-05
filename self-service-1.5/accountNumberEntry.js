@@ -1,28 +1,28 @@
 require('dotenv-safe').config()
 const express = require('express')
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Say, Redirect, Pause } = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 
 router = express.Router()
 let acctMenuErrCount = 0
 
 router.post('/accountNumberPrompt', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.getSpeech(
-                `${host}/accountNumber`,
-                freeclimb.enums.grammarFileBuiltIn.ANY_DIG,
-                {
-                    grammarType: freeclimb.enums.grammarType.BUILTIN,
+        new PerclScript({
+            commands: [
+                new GetSpeech({
+                    actionUrl: `${host}/accountNumber`,
+                    grammarFile: 'ANY_DIG',
+                    grammarType: 'BUILTIN',
                     prompts: [
-                        freeclimb.percl.say('Please enter or say your six digit account number')
+                        new Say({ text: 'Please enter or say your six digit account number' })
                     ]
-                }
-            )
-        )
+                })
+            ]
+        }).build()
     )
 })
 
@@ -33,29 +33,36 @@ router.post('/accountNumber', (req, res) => {
     if ((!response || response.length < 6) && acctMenuErrCount < 2) {
         acctMenuErrCount++
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say('Error'),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/accountNumberPrompt`)
-            )
+            new PerclScript({
+                commands: [
+                    new Say({ text: 'Error' }),
+                    new Pause({ length: 100 }),
+                    new Redirect({ actionUrl: `${host}/accountNumberPrompt` })
+
+                ]
+            }).build()
         )
     } else if (acctMenuErrCount >= 2) {
         acctMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.say(
-                    'Max retry limit reached, please wait while we connect you to an operator'
-                ),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/transfer`)
-            )
+            new PerclScript({
+                commands: [
+                    new Say({
+                        text: 'Max retry limit reached, please wait while we connect you to an operator'
+                    }),
+                    new Pause({ length: 100 }),
+                    new Redirect({ actionUrl: `${host}/transfer` })
+                ]
+            }).build()
         )
     } else {
         acctMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.redirect(`${host}/confirmAccountNumberPrompt?acct=${response}`)
-            )
+            new PerclScript({
+                commands: [
+                    new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${response}` })
+                ]
+            }).build()
         )
     }
 })

@@ -1,10 +1,10 @@
 require('dotenv-safe').config()
 const express = require('express')
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetDigits } = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 
 router = express.Router()
 
@@ -13,23 +13,19 @@ let retries = 0
 
 router.post('/confirmAccountNumberPrompt', (req, res) => {
   res.status(200).json(
-    freeclimb.percl.build(
-      freeclimb.percl.getDigits(
-        `${host}/confirmAccountNumber?acct=${req.param('acct')}`,
-        {
+    new PerclScript({
+      commands: [
+        new GetDigits({
+          actionUrl: `${host}/confirmAccountNumber?acct=${req.param('acct')}`,
           prompts: [
-            freeclimb.percl.say(
-              `You entered ${req.param(
-                'acct'
-              )} is that correct? Press 1 to confirm your account number or 2 to try again`
-            )
+            new Say({ text: `You entered ${req.param( 'acct')} is that correct? Press 1 to confirm your account number or 2 to try again` })
           ],
           maxDigits: 1,
           minDigits: 1,
           flushBuffer: true
-        }
-      )
-    )
+        })
+      ]
+    }).build()
   )
 })
 
@@ -61,25 +57,25 @@ router.post('/confirmAccountNumber', (req, res) => {
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say('Error'),
-          freeclimb.percl.redirect(
-            `${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}`
-          )
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: 'Error' }),
+            new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}` })
+          ]
+        }).build()
       )
   } else if (confirmNumberErrCount >= 3 || retries >= 2) {
     confirmNumberErrCount = 0
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say(
-            'Please wait while we connect you to an operator'
-          ),
-          freeclimb.percl.pause(100),
-          freeclimb.percl.redirect(`${host}/transfer`)
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: 'Please wait while we connect you to an operator' }),
+            new Pause({ length: 100 }),
+            new Redirect({ actionUrl: `${host}/transfer` })
+          ]
+        }).build()
       )
   } else {
     confirmNumberErrCount = 0
@@ -91,10 +87,12 @@ router.post('/confirmAccountNumber', (req, res) => {
     res
       .status(200)
       .json(
-        freeclimb.percl.build(
-          freeclimb.percl.say(menuOpts.get(digits).script),
-          freeclimb.percl.redirect(menuOpts.get(digits).redirect)
-        )
+        new PerclScript({
+          commands: [
+            new Say({ text: menuOpts.get(digits).script }),
+            new Redirect({ actionUrl: menuOpts.get(digits).redirect })
+          ]
+        }).build()
       )
   }
 })

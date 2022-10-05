@@ -25,6 +25,7 @@ describe('POST /accountNumberPrompt', () => {
           prompts: [
             {
               Say: {
+                loop: 1,
                 text: 'Please Enter your account number'
               }
             }
@@ -45,6 +46,7 @@ describe('POST /accountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'Error, please enter your six digit account number or press 0 to speak with an operator'
         }
@@ -71,6 +73,7 @@ describe('POST /accountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'Error, please enter your six digit account number or press 0 to speak with an operator'
         }
@@ -104,6 +107,7 @@ describe('POST /accountNumber', () => {
     expect(res.body).toStrictEqual([
       {
         Say: {
+          loop: 1,
           text:
             'Max retry limit reached, please wait while we connect you to an operator'
         }

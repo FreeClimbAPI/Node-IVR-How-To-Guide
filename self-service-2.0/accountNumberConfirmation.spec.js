@@ -25,6 +25,7 @@ describe('POST /confirmAccountNumberPrompt', () => {
                     prompts: [
                         {
                             Say: {
+                                loop: 1,
                                 text:
                                     'You entered 111222 is that correct? Press 1 or say yes to confirm your account number or press 2 or say no to try again'
                             }

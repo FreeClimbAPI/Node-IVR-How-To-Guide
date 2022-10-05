@@ -4,13 +4,13 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, Redirect, Pause, Play, Hangup } = require('@freeclimb/sdk')
 
 const port = process.env.PORT || 3000
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 const mainMenuRoutes = require('./mainMenu')
 const accountNumberEntryRoutes = require('./accountNumberEntry')
 const accountNumberConfirmationRoutes = require('./accountNumberConfirmation')
@@ -25,29 +25,35 @@ app.use('/', accountReadRoutes)
 
 app.post('/incomingCall', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.play(`${host}/indexAudio?audio=greeting.wav`),
-            freeclimb.percl.pause(100),
-            freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-        )
+        new PerclScript({
+            commands: [
+                new Play({ file: `${host}/indexAudio?audio=greeting.wav` }),
+                new Pause({ length: 100 }),
+                new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+            ]
+        }).build()
     )
 })
 
 app.post('/transfer', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.play(`${host}/indexAudio?audio=transfer.wav`),
-            freeclimb.percl.redirect(`${host}/endCall`)
-        )
+        new PerclScript({
+            commands: [
+                new Play({ file: `${host}/indexAudio?audio=transfer.wav` }),
+                new Redirect({ actionUrl: `${host}/endCall` })
+            ]
+        }).build()
     )
 })
 
 app.post('/endCall', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.play(`${host}/indexAudio?audio=hangup.wav`),
-            freeclimb.percl.hangup()
-        )
+        new PerclScript({
+            commands: [
+                new Play({ file: `${host}/indexAudio?audio=hangup.wav` }),
+                new Hangup({})
+            ]
+        }).build()
     )
 })
 

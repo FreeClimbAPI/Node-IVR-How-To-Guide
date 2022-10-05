@@ -1,10 +1,10 @@
 require('dotenv-safe').config()
 const express = require('express')
-const freeclimbSDK = require('@freeclimb/sdk')
+const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Redirect, Pause, Play, Hangup } = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const freeclimb = new DefaultApi(createConfiguration({ accountId, apiKey }))
 
 router = express.Router()
 
@@ -12,13 +12,19 @@ let mainMenuErrCount = 0
 
 router.post('/mainMenuPrompt', (req, res) => {
     res.status(200).json(
-        freeclimb.percl.build(
-            freeclimb.percl.getSpeech(`${host}/mainMenu`, `${host}/mainMenuGrammar`, {
-                grammarType: freeclimb.enums.grammarType.URL,
-                grammarRule: 'option',
-                prompts: [freeclimb.percl.play(`${host}/mainMenuAudio?audio=mainMenuPrompt.wav`)]
-            })
-        )
+        new PerclScript({
+            commands: [
+                new GetSpeech({
+                    actionUrl: `${host}/mainMenu`,
+                    grammarFile: `${host}/mainMenuGrammar`,
+                    grammarType: 'URL', 
+                    grammarRule: 'option',
+                    prompts: [
+                        new Play({ file: `${host}/mainMenuAudio?audio=mainMenuPrompt.wav` })
+                    ]
+                })
+            ]
+        }).build()
     )
 })
 
@@ -26,7 +32,7 @@ router.post('/mainMenu', (req, res) => {
     let menuOpts
     const getSpeechResponse = req.body
     const response = getSpeechResponse.recognitionResult
-    if (req.body.reason === freeclimb.enums.getSpeechReason.DIGIT) {
+    if (req.body.reason === 'digit') {
         menuOpts = new Map([
             [
                 '1',
@@ -50,7 +56,7 @@ router.post('/mainMenu', (req, res) => {
                 }
             ]
         ])
-    } else if (req.body.reason === freeclimb.enums.getSpeechReason.RECOGNITION) {
+    } else if (req.body.reason === 'recognition') {
         menuOpts = new Map([
             [
                 'EXISTING',
@@ -79,27 +85,33 @@ router.post('/mainMenu', (req, res) => {
     if ((!response || !menuOpts.get(response)) && mainMenuErrCount < 3) {
         mainMenuErrCount++
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.play(`${host}/mainMenuAudio?audio=error.wav`),
-                freeclimb.percl.redirect(`${host}/mainMenuPrompt`)
-            )
+            new PerclScript({
+                commands: [
+                    new Play({ file: `${host}/mainMenuAudio?audio=error.wav` }),
+                    new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+                ]
+            }).build()
         )
     } else if (mainMenuErrCount >= 3) {
         mainMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.play(`${host}/mainMenuAudio?audio=maxRetry.wav`),
-                freeclimb.percl.pause(100),
-                freeclimb.percl.redirect(`${host}/endCall`)
-            )
+            new PerclScript({
+                commands: [
+                    new Play({ file: `${host}/mainMenuAudio?audio=maxRetry.wav` }),
+                    new Pause({ length: 100 }),
+                    new Redirect({ actionUrl: `${host}/endCall` })
+                ]
+            }).build()
         )
     } else {
         mainMenuErrCount = 0
         res.status(200).json(
-            freeclimb.percl.build(
-                freeclimb.percl.play(menuOpts.get(response).audioUrl),
-                freeclimb.percl.redirect(menuOpts.get(response).redirect)
-            )
+            new PerclScript({
+                commands: [
+                    new Play({ file: menuOpts.get(response).audioUrl }),
+                    new Redirect({ actionUrl: menuOpts.get(response).redirect })
+                ]
+            }).build()
         )
     }
 })

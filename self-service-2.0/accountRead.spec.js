@@ -57,6 +57,7 @@ describe('POST /acccountRead', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
+                    loop: 1,
                     text:
                         "Welcome back Jane Smith, I've found your most recent order from March 30th 2020, please hold while I connect you with a customer service representative. "
                 }
