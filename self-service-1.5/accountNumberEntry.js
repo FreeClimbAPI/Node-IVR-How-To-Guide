@@ -1,6 +1,14 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Say, Redirect, Pause } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Say,
+    Redirect,
+    Pause
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -38,7 +46,6 @@ router.post('/accountNumber', (req, res) => {
                     new Say({ text: 'Error' }),
                     new Pause({ length: 100 }),
                     new Redirect({ actionUrl: `${host}/accountNumberPrompt` })
-
                 ]
             }).build()
         )
@@ -48,7 +55,8 @@ router.post('/accountNumber', (req, res) => {
             new PerclScript({
                 commands: [
                     new Say({
-                        text: 'Max retry limit reached, please wait while we connect you to an operator'
+                        text:
+                            'Max retry limit reached, please wait while we connect you to an operator'
                     }),
                     new Pause({ length: 100 }),
                     new Redirect({ actionUrl: `${host}/transfer` })
@@ -60,7 +68,9 @@ router.post('/accountNumber', (req, res) => {
         res.status(200).json(
             new PerclScript({
                 commands: [
-                    new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${response}` })
+                    new Redirect({
+                        actionUrl: `${host}/confirmAccountNumberPrompt?acct=${response}`
+                    })
                 ]
             }).build()
         )

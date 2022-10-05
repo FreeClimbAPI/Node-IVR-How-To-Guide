@@ -5,17 +5,28 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const { createConfiguration, DefaultApi, Say, Pause, Redirect, PerclScript, GetDigits, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    Say,
+    Pause,
+    Redirect,
+    PerclScript,
+    GetDigits,
+    Hangup
+} = require('@freeclimb/sdk')
 
 // global variables
 const port = process.env.PORT || 3000
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-const freeclimbAPI = new DefaultApi(createConfiguration({
-    accountId,
-    apiKey
-}))
+const freeclimbAPI = new DefaultApi(
+    createConfiguration({
+        accountId,
+        apiKey
+    })
+)
 
 // set error counter to zero
 let mainMenuErrCount = 0
@@ -40,7 +51,8 @@ app.post('/mainMenuPrompt', (req, res) => {
                 actionUrl: `${host}/mainMenu`,
                 prompts: [
                     new Say({
-                        text: 'Press 1 for existing orders, 2 for new orders, or 0 to speak to an operator'
+                        text:
+                            'Press 1 for existing orders, 2 for new orders, or 0 to speak to an operator'
                     })
                 ],
 
@@ -122,7 +134,9 @@ app.post('/transfer', (req, res) => {
 app.post('/endCall', (req, res) => {
     const percl = new PerclScript({
         commands: [
-            new Say({ text: 'Thank you for calling the Node IVR sample app baseline, have a nice day!' }),
+            new Say({
+                text: 'Thank you for calling the Node IVR sample app baseline, have a nice day!'
+            }),
             new Hangup({})
         ]
     })

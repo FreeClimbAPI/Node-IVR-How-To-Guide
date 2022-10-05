@@ -5,7 +5,16 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetSpeech, Hangup } = require('@freeclimb/sdk')
+const {
+  createConfiguration,
+  DefaultApi,
+  PerclScript,
+  Say,
+  Pause,
+  Redirect,
+  GetSpeech,
+  Hangup
+} = require('@freeclimb/sdk')
 
 // global variables
 const port = process.env.PORT || 3000
@@ -19,17 +28,15 @@ let mainMenuErrCount = 0
 
 // handle an incoming call
 app.post('/incomingCall', (req, res) => {
-  res
-    .status(200)
-    .json(
-      new PerclScript({
-        commands: [
-          new Say({ text: 'Welcome to the Node IVR Sample app baseline.' }),
-          new Pause({ length: 100 }),
-          new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
-        ]
-      }).build()
-    )
+  res.status(200).json(
+    new PerclScript({
+      commands: [
+        new Say({ text: 'Welcome to the Node IVR Sample app baseline.' }),
+        new Pause({ length: 100 }),
+        new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+      ]
+    }).build()
+  )
 })
 
 // collect voice and/or dtmf input from the user to direct them to their next destination
@@ -44,7 +51,8 @@ app.post('/mainMenuPrompt', (req, res) => {
           grammarRule: 'option',
           prompts: [
             new Say({
-              text: 'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
+              text:
+                'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
             })
           ]
         })
@@ -118,71 +126,64 @@ app.post('/mainMenu', (req, res) => {
   if ((!response || !menuOpts.get(response)) && mainMenuErrCount < 3) {
     // error counting keeps bad actors from cycling within your applications
     mainMenuErrCount++
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: 'Error, please try again' }),
-            new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Error, please try again' }),
+          new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
+        ]
+      }).build()
+    )
   } else if (mainMenuErrCount >= 3) {
     // we recommend giving your customers 3 tries before ending the call
     mainMenuErrCount = 0
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: 'Max retry limit reached' }),
-            new Pause({ length: 100 }),
-            new Redirect({ actionUrl: `${host}/endCall` })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Max retry limit reached' }),
+          new Pause({ length: 100 }),
+          new Redirect({ actionUrl: `${host}/endCall` })
+        ]
+      }).build()
+    )
   } else {
     mainMenuErrCount = 0
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: menuOpts.get(response).script }),
-            new Redirect({ actionUrl: menuOpts.get(response).redirect })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: menuOpts.get(response).script }),
+          new Redirect({ actionUrl: menuOpts.get(response).redirect })
+        ]
+      }).build()
+    )
   }
 })
 
 // transfer call to an operator or other department
 app.post('/transfer', (req, res) => {
-  res
-    .status(200)
-    .json(
-      new PerclScript({
-        commands: [
-          new Say({ text: 'Please wait while we transfer you to an operator' }),
-          new Redirect({ actionUrl: `${host}/endCall` })
-        ]
-      }).build()
-    )
+  res.status(200).json(
+    new PerclScript({
+      commands: [
+        new Say({ text: 'Please wait while we transfer you to an operator' }),
+        new Redirect({ actionUrl: `${host}/endCall` })
+      ]
+    }).build()
+  )
 })
 
 // end call
 app.post('/endCall', (req, res) => {
-  res
-    .status(200)
-    .json(
-      new PerclScript({
-        commands: [
-          new Say({ text: 'Thank you for calling the Node IVR sample app baseline, have a nice day!' }),
-          new Hangup({})
-        ]
-      }).build()
-    )
+  res.status(200).json(
+    new PerclScript({
+      commands: [
+        new Say({
+          text:
+            'Thank you for calling the Node IVR sample app baseline, have a nice day!'
+        }),
+        new Hangup({})
+      ]
+    }).build()
+  )
 })
 
 // start the server

@@ -1,6 +1,16 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Redirect, Pause, Play, Say, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Redirect,
+    Pause,
+    Play,
+    Say,
+    Hangup
+} = require('@freeclimb/sdk')
 const accounts = require('./accounts')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID

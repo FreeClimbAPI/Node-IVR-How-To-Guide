@@ -174,7 +174,8 @@ describe('POST /endCall', () => {
         expect(res.body).toStrictEqual([
             {
                 Say: {
-                    text: 'Thank you for calling the Node IVR sample app baseline, have a nice day!',
+                    text:
+                        'Thank you for calling the Node IVR sample app baseline, have a nice day!',
                     loop: 1
                 }
             },

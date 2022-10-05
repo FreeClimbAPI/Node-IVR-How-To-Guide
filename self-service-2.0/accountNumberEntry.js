@@ -1,6 +1,16 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Redirect, Pause, Play, Say, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Redirect,
+    Pause,
+    Play,
+    Say,
+    Hangup
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -18,8 +28,9 @@ router.post('/accountNumberPrompt', (req, res) => {
                     grammarFile: 'ANY_DIG',
                     grammarType: 'BUILTIN',
                     prompts: [
-                        new Play({ file: `${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav` }
-                        )
+                        new Play({
+                            file: `${host}/accountNumberEntryAudio?audio=accountNumberPrompt.wav`
+                        })
                     ]
                 })
             ]
@@ -49,7 +60,7 @@ router.post('/accountNumber', (req, res) => {
                 commands: [
                     new Play({ file: `${host}/accountNumberEntryAudio?audio=maxRetry.wav` }),
                     new Pause({ length: 100 }),
-                    new Redirect({ actionUrl:`${host}/transfer` })
+                    new Redirect({ actionUrl: `${host}/transfer` })
                 ]
             }).build()
         )
@@ -58,7 +69,9 @@ router.post('/accountNumber', (req, res) => {
         res.status(200).json(
             new PerclScript({
                 commands: [
-                    new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${response}` })
+                    new Redirect({
+                        actionUrl: `${host}/confirmAccountNumberPrompt?acct=${response}`
+                    })
                 ]
             }).build()
         )

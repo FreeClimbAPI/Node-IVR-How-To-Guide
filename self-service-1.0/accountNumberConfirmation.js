@@ -1,6 +1,14 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetDigits } = require('@freeclimb/sdk')
+const {
+  createConfiguration,
+  DefaultApi,
+  PerclScript,
+  Say,
+  Pause,
+  Redirect,
+  GetDigits
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -18,7 +26,11 @@ router.post('/confirmAccountNumberPrompt', (req, res) => {
         new GetDigits({
           actionUrl: `${host}/confirmAccountNumber?acct=${req.param('acct')}`,
           prompts: [
-            new Say({ text: `You entered ${req.param( 'acct')} is that correct? Press 1 to confirm your account number or 2 to try again` })
+            new Say({
+              text: `You entered ${req.param(
+                'acct'
+              )} is that correct? Press 1 to confirm your account number or 2 to try again`
+            })
           ],
           maxDigits: 1,
           minDigits: 1,
@@ -54,29 +66,29 @@ router.post('/confirmAccountNumber', (req, res) => {
   ])
   if ((!digits || !menuOpts.get(digits)) && confirmNumberErrCount < 3) {
     confirmNumberErrCount++
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: 'Error' }),
-            new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}` })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Error' }),
+          new Redirect({
+            actionUrl: `${host}/confirmAccountNumberPrompt?acct=${req.param(
+              'acct'
+            )}`
+          })
+        ]
+      }).build()
+    )
   } else if (confirmNumberErrCount >= 3 || retries >= 2) {
     confirmNumberErrCount = 0
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: 'Please wait while we connect you to an operator' }),
-            new Pause({ length: 100 }),
-            new Redirect({ actionUrl: `${host}/transfer` })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: 'Please wait while we connect you to an operator' }),
+          new Pause({ length: 100 }),
+          new Redirect({ actionUrl: `${host}/transfer` })
+        ]
+      }).build()
+    )
   } else {
     confirmNumberErrCount = 0
     if (digits === '2') {
@@ -84,16 +96,14 @@ router.post('/confirmAccountNumber', (req, res) => {
     } else if (digits === '1') {
       retries = 0
     }
-    res
-      .status(200)
-      .json(
-        new PerclScript({
-          commands: [
-            new Say({ text: menuOpts.get(digits).script }),
-            new Redirect({ actionUrl: menuOpts.get(digits).redirect })
-          ]
-        }).build()
-      )
+    res.status(200).json(
+      new PerclScript({
+        commands: [
+          new Say({ text: menuOpts.get(digits).script }),
+          new Redirect({ actionUrl: menuOpts.get(digits).redirect })
+        ]
+      }).build()
+    )
   }
 })
 

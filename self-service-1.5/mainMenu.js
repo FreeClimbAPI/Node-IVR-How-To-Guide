@@ -1,6 +1,14 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Say, Redirect, Pause } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Say,
+    Redirect,
+    Pause
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -20,7 +28,10 @@ router.post('/mainMenuPrompt', (req, res) => {
                     grammarType: 'URL',
                     grammarRule: 'option',
                     prompts: [
-                        new Say({ text: 'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator' })
+                        new Say({
+                            text:
+                                'Say existing or press 1 for existing orders. Say new or press 2 for new orders, or Say operator or press 0 to speak to an operator'
+                        })
                     ]
                 })
             ]
@@ -77,7 +88,6 @@ router.post('/mainMenu', (req, res) => {
                 commands: [
                     new Say({ text: 'Error, please try again' }),
                     new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
-
                 ]
             }).build()
         )

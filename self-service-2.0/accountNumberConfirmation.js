@@ -1,6 +1,16 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Redirect, Pause, Play, Say, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Redirect,
+    Pause,
+    Play,
+    Say,
+    Hangup
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -92,8 +102,12 @@ router.post('/confirmAccountNumber', (req, res) => {
         res.status(200).json(
             new PerclScript({
                 commands: [
-                    new Play({ file:`${host}/accountNumberConfirmationAudio?audio=shortError.wav` }),
-                    new Redirect({ actionUrl: `${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}` })
+                    new Play({
+                        file: `${host}/accountNumberConfirmationAudio?audio=shortError.wav`
+                    }),
+                    new Redirect({
+                        actionUrl: `${host}/confirmAccountNumberPrompt?acct=${req.param('acct')}`
+                    })
                 ]
             }).build()
         )

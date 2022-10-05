@@ -1,6 +1,15 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Redirect, Pause, Play, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Redirect,
+    Pause,
+    Play,
+    Hangup
+} = require('@freeclimb/sdk')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
@@ -17,11 +26,9 @@ router.post('/mainMenuPrompt', (req, res) => {
                 new GetSpeech({
                     actionUrl: `${host}/mainMenu`,
                     grammarFile: `${host}/mainMenuGrammar`,
-                    grammarType: 'URL', 
+                    grammarType: 'URL',
                     grammarRule: 'option',
-                    prompts: [
-                        new Play({ file: `${host}/mainMenuAudio?audio=mainMenuPrompt.wav` })
-                    ]
+                    prompts: [new Play({ file: `${host}/mainMenuAudio?audio=mainMenuPrompt.wav` })]
                 })
             ]
         }).build()

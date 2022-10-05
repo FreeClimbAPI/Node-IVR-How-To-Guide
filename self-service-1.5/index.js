@@ -4,7 +4,16 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const { createConfiguration, DefaultApi, PerclScript, Say, Pause, Redirect, GetDigits, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    Say,
+    Pause,
+    Redirect,
+    GetDigits,
+    Hangup
+} = require('@freeclimb/sdk')
 
 const port = process.env.PORT || 3000
 const host = process.env.HOST
@@ -30,7 +39,6 @@ app.post('/incomingCall', (req, res) => {
                 new Say({ text: 'Welcome to the Node self service IVR.' }),
                 new Pause({ length: 100 }),
                 new Redirect({ actionUrl: `${host}/mainMenuPrompt` })
-
             ]
         }).build()
     )
@@ -51,7 +59,9 @@ app.post('/endCall', (req, res) => {
     res.status(200).json(
         new PerclScript({
             commands: [
-                new Say({ text: 'Thank you for calling the Node self service IVR , have a nice day!'  }),
+                new Say({
+                    text: 'Thank you for calling the Node self service IVR , have a nice day!'
+                }),
                 new Hangup({})
             ]
         }).build()

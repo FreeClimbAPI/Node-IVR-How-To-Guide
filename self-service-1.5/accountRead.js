@@ -1,6 +1,14 @@
 require('dotenv-safe').config()
 const express = require('express')
-const { createConfiguration, DefaultApi, PerclScript, GetSpeech, Say, Redirect, Pause } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    GetSpeech,
+    Say,
+    Redirect,
+    Pause
+} = require('@freeclimb/sdk')
 const accounts = require('./accounts')
 const host = process.env.HOST
 const accountId = process.env.ACCOUNT_ID
@@ -17,7 +25,10 @@ router.post('/accountRead', (req, res) => {
             res.status(200).json(
                 new PerclScript({
                     commands: [
-                        new Say({ text: 'Welcome back platinum member, please wait while we connect you with a customer service representative.' }),
+                        new Say({
+                            text:
+                                'Welcome back platinum member, please wait while we connect you with a customer service representative.'
+                        }),
                         new Pause({ length: 100 }),
                         new Redirect({ actionUrl: `${host}/transfer` })
                     ]
@@ -27,9 +38,8 @@ router.post('/accountRead', (req, res) => {
             res.status(200).json(
                 new PerclScript({
                     commands: [
-                        new Say({ 
+                        new Say({
                             text: `Welcome back ${account.name}, I've found your most recent order from ${account.mostRecentOrderDate}, please hold while I connect you with a customer service representative. `
-
                         }),
                         new Pause({ length: 100 }),
                         new Redirect({ actionUrl: `${host}/transfer` })
@@ -39,15 +49,15 @@ router.post('/accountRead', (req, res) => {
         }
     } else {
         res.status(200).json(
-                new PerclScript({
-                    commands: [
-                        new Say({ 
-                            text: 'This account appears to be closed please wait while we transfer you to an operator for asistance'
-
-                        }),
-                        new Redirect({ actionUrl: `${host}/transfer` })
-                    ]
-                }).build()
+            new PerclScript({
+                commands: [
+                    new Say({
+                        text:
+                            'This account appears to be closed please wait while we transfer you to an operator for asistance'
+                    }),
+                    new Redirect({ actionUrl: `${host}/transfer` })
+                ]
+            }).build()
         )
     }
 })

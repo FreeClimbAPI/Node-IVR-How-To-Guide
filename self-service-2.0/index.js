@@ -4,7 +4,15 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-const { createConfiguration, DefaultApi, PerclScript, Redirect, Pause, Play, Hangup } = require('@freeclimb/sdk')
+const {
+    createConfiguration,
+    DefaultApi,
+    PerclScript,
+    Redirect,
+    Pause,
+    Play,
+    Hangup
+} = require('@freeclimb/sdk')
 
 const port = process.env.PORT || 3000
 const host = process.env.HOST
@@ -49,10 +57,7 @@ app.post('/transfer', (req, res) => {
 app.post('/endCall', (req, res) => {
     res.status(200).json(
         new PerclScript({
-            commands: [
-                new Play({ file: `${host}/indexAudio?audio=hangup.wav` }),
-                new Hangup({})
-            ]
+            commands: [new Play({ file: `${host}/indexAudio?audio=hangup.wav` }), new Hangup({})]
         }).build()
     )
 })
