@@ -10,7 +10,7 @@ This repo offers five variations of an IVR application:
 - [Self Service: Voice-enabled DTMF Using Audio Files](self-service-2.0)
 
 ## How-To Guide
-We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
+We offer an [Interactive Voice Response (IVR) how-to guide](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
 A [FreeClimb account](https://freeclimb.com/dashboard/)
