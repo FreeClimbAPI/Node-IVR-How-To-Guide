@@ -14,7 +14,7 @@ Specifically, the project will:
 - Collect DTMF input from the user
 - Route the users call based on DTMF or speech input
 
-## Tutorial
+## How-to Guide
 We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
