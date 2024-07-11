@@ -14,7 +14,7 @@ Specifically, the project will:
 - Utilize Text-to-Speech (TTS) via the [`Say` PerCL command](https://docs.freeclimb.com/reference/say) to communicate to users
 - Route the users call based on DTMF or speech input
 
-## Tutorial
+## How-To Guide
 We offer an [Interactive Voice Response (IVR) how-to guide](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
