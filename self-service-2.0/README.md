@@ -14,8 +14,8 @@ Specifically, the project will:
 - Playback pre-recorded audio prompts via the [`Play` PerCL command](https://docs.freeclimb.com/reference/play) to communicate with users
 - Route the users call based on DTMF or speech input
 
-## Tutorial
-We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
+## How-To Guide
+We offer an [Interactive Voice Response (IVR) how-to guide](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
 A [FreeClimb account](https://www.freeclimb.com/dashboard/signup/)
