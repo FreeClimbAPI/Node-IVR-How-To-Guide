@@ -1,4 +1,4 @@
-# Node IVR Sample Apps
+# Node IVR How-To Guide
 
 FreeClimb’s Interactive Voice Response (IVR) feature allows for automated interactions between FreeClimb and the caller where the caller responds with voice and/or [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) (e.g. keyapd) inputs. Read our [Building an IVR](https://docs.freeclimb.com/docs/building-an-ivr) guide for more information. 
 
@@ -9,7 +9,7 @@ This repo offers five variations of an IVR application:
 - [Self Service: Voice-enabled DTMF Using Text-to-Speech](self-service-1.5)
 - [Self Service: Voice-enabled DTMF Using Audio Files](self-service-2.0)
 
-## Tutorial
+## How-To Guide
 We offer an [Interactive Voice Response (IVR) tutorial](https://docs.freeclimb.com/docs/ivr-call-routing-10) for more detailed set-up instructions and explanation of how the code in each IVR sample app variation works.
 
 ## Requirements
